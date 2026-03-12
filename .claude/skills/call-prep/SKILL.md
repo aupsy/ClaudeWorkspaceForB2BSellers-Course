@@ -1,8 +1,6 @@
 ---
 name: call-prep
-description: Generate a 1-page pre-call briefing for any account. Reads account folder, product context, and competitive intel to prepare you for any meeting.
-invocation: /call-prep
-example_usage: /call-prep Acme Corp
+description: Generate a 1-page pre-call briefing for any account. Queries your CRM live for opportunity data, contacts, and recent activity. Supplements with any local qualitative notes.
 ---
 
 # Call Prep Skill
@@ -11,62 +9,118 @@ Generate a pre-call briefing for an account. Usage: `/call-prep [Account Name]`
 
 ## Instructions
 
-When this skill is invoked with an account name:
+### Step 1: Query Your CRM (Primary Source)
 
-1. **Find the account folder**: Look in `Accounts/` for a folder matching the account name (fuzzy match is fine — "Acme" should match "Acme-Corp"). If no folder exists, say so and generate a research-based briefing from public context instead.
+Use the CRM MCP server to fetch live data. Run these queries in order:
 
-2. **Read all account files**:
-   - `Account-Overview.md` — company, stakeholders, deal status, pain points
-   - `Engagement-Log.md` — read the last 3-5 entries to understand recent history
-   - `Open-Items.md` — what's committed, what's open, what they owe us
+**Find the account and opportunity:**
+```soql
+SELECT Id, Name, StageName, Amount, CloseDate, Probability,
+       NextStep, LastActivityDate,
+       Account.Id, Account.Name, Account.Industry,
+       Account.AnnualRevenue, Account.NumberOfEmployees,
+       Account.Website, Account.BillingCity, Account.BillingCountry
+FROM Opportunity
+WHERE Account.Name LIKE '%{account_name}%'
+  AND IsClosed = false
+ORDER BY Amount DESC
+LIMIT 1
+```
 
-3. **Check for relevant context**:
-   - If a competitor is mentioned in account notes, check `Knowledge/compete/` for the relevant battle card
-   - Read `Knowledge/product/Product-Overview.md` for product context relevant to their pain points
-   - Check `Knowledge/plays/Discovery-Framework.md` if this is an early-stage call
+**Fetch key contacts:**
+```soql
+SELECT Id, Name, Title, Email, Phone, Department
+FROM Contact
+WHERE AccountId = '{account_id}'
+ORDER BY LastModifiedDate DESC
+LIMIT 10
+```
 
-4. **Generate the briefing** in this format:
+**Fetch recent activity (last 60 days):**
+```soql
+SELECT Id, Subject, ActivityDate, Description, Status,
+       Who.Name, Who.Title
+FROM Task
+WHERE WhatId = '{opportunity_id}'
+  AND ActivityDate >= LAST_N_DAYS:60
+ORDER BY ActivityDate DESC
+LIMIT 10
+```
+
+```soql
+SELECT Id, Subject, ActivityDateTime, Description,
+       Who.Name, Who.Title
+FROM Event
+WHERE WhatId = '{opportunity_id}'
+  AND ActivityDateTime >= LAST_N_DAYS:60
+ORDER BY ActivityDateTime DESC
+LIMIT 5
+```
+
+**If your CRM is not Salesforce**, adapt the queries to the equivalent objects in your CRM (e.g., HubSpot Deals/Contacts/Activities, Dynamics Opportunities/Contacts/Activities).
+
+**If MCP is not configured**, skip to Step 2 and rely on local notes, flagging that CRM data is unavailable.
+
+### Step 2: Check for Local Qualitative Notes (Supplement)
+
+Look for `Accounts/[Account Name]/` in the repo. If found, read:
+- `Account-Overview.md` — for stakeholder context, political notes, relationship nuance
+- `Engagement-Log.md` — for qualitative call notes not captured in CRM activities
+- `Open-Items.md` — for commitments and open questions
+
+These supplement the CRM data — they capture what sellers know but don't (or shouldn't) put in the CRM.
+
+### Step 3: Pull Relevant Knowledge
+
+- If a competitor is mentioned in CRM opportunity fields or local notes, read `Knowledge/compete/[Competitor].md`
+- For early-stage deals, read `Knowledge/plays/Discovery-Framework.md` for suggested questions
+- Read `Knowledge/product/Product-Overview.md` only if needed to frame product context
+
+### Step 4: Generate the Briefing
 
 ---
 
 ## Pre-Call Briefing: [Account Name]
-*Generated: [Today's date] | Call type: [infer from context]*
+*Generated: [Today's date] | Data source: [CRM live / Local notes only]*
 
 ### Quick Context (30-second read)
-[2-3 sentence summary: who they are, where we are in the deal, what this call needs to accomplish]
+[2-3 sentences: who they are, where we are in the deal, what this call needs to accomplish]
 
 ### Relationship & Deal Status
-- **Stage**: [Current stage]
-- **Deal size**: [Estimated ARR]
-- **Expected close**: [Close date]
-- **Relationship health**: [Green / Yellow / Red — based on recency and sentiment of recent engagement]
-- **Champion**: [Name, title] — [1-line on their motivation]
-- **Economic Buyer**: [Name, title] — [have we met them? Y/N]
+- **Stage**: [from CRM]
+- **Deal size**: [Amount from CRM]
+- **Expected close**: [CloseDate from CRM]
+- **Last CRM activity**: [LastActivityDate — flag if >21 days ago]
+- **Champion**: [from local notes or CRM contact roles]
+- **Economic Buyer**: [from local notes or CRM — have we met them? Y/N]
 
-### What Happened Last Time
-[3-5 bullet summary of the most recent engagement — key things discussed, tone, what was agreed]
+### Recent Activity (from CRM)
+[3-5 bullet summary of recent tasks/events — key interactions, tone, what was discussed]
+
+### Qualitative Context (from local notes)
+[Only if local account folder exists — political dynamics, relationship nuance, anything not in the CRM. If no local notes exist, omit this section.]
 
 ### Open Items Heading Into This Call
-**We owe them**:
-- [Item 1]
-- [Item 2]
+**We owe them** [from Open-Items.md or CRM tasks assigned to us]:
+- [Item]
 
-**They owe us**:
-- [Item 1]
-- [Item 2]
+**They owe us** [from Open-Items.md or CRM tasks assigned to them]:
+- [Item]
 
 ### Suggested Agenda
-[Draft a 3-5 point agenda based on the stage and open items]
+[3-5 point agenda based on deal stage and open items]
 
 ### Key Questions to Ask
-[5-7 questions tailored to their situation and where we are in the deal — pull from Discovery Framework if relevant]
+[5-7 questions tailored to their situation — pull from Discovery Framework for early-stage deals]
 
 ### Competitive Watch
-[If a competitor is active in this deal: key positioning notes, landmines to avoid, questions to ask]
+[If a competitor is in play: positioning notes, landmines, questions to surface differentiation]
 
 ### What a Good Outcome Looks Like
-[Define success for this call — what should we walk away with?]
+[Define success for this specific call]
 
 ---
 
-5. **Ask the rep**: "Is there anything specific you want me to focus on or any context I'm missing before the call?"
+### Step 5: Close with a Check-In
+
+"Anything specific you want me to focus on, or any context since your last CRM update I should know about?"

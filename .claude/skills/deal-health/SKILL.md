@@ -1,8 +1,6 @@
 ---
 name: deal-health
 description: Score a deal's health using the MEDDIC framework. Identifies gaps, rates risk, and recommends next 3 actions to advance the deal.
-invocation: /deal-health
-example_usage: /deal-health Acme Corp
 ---
 
 # Deal Health Skill
@@ -15,12 +13,35 @@ When invoked with an account name:
 
 ### Step 1: Gather Information
 
-1. Find and read the account folder (`Accounts/[Account Name]/`):
-   - `Account-Overview.md` — full deal context
-   - `Engagement-Log.md` — recent activity and what's been discussed
-   - `Open-Items.md` — commitments and open questions
+**Primary — query CRM live:**
+```soql
+SELECT Id, Name, StageName, Amount, CloseDate, Probability,
+       NextStep, LastActivityDate, LastStageChangeDate,
+       Account.Name, Account.Industry,
+       (SELECT Id, Name, Title, Email, Role FROM OpportunityContactRoles),
+       (SELECT Id, Subject, ActivityDate, Description FROM Tasks
+        ORDER BY ActivityDate DESC LIMIT 10),
+       (SELECT Id, Subject, ActivityDateTime FROM Events
+        ORDER BY ActivityDateTime DESC LIMIT 5)
+FROM Opportunity
+WHERE Account.Name LIKE '%{account_name}%'
+  AND IsClosed = false
+LIMIT 1
+```
 
-2. If the account folder doesn't exist or is sparse, ask the rep to fill in the gaps before scoring.
+Also check for any MEDDIC-related custom fields your org may have set up (e.g., `MEDDIC_Champion__c`, `Economic_Buyer__c`, `Decision_Criteria__c`).
+
+**If your CRM is not Salesforce**, query the equivalent objects via the configured MCP server.
+
+**Supplement — check local qualitative notes:**
+Look for `Accounts/[Account Name]/` in the repo. If found, read:
+- `Account-Overview.md` — stakeholder context, political notes, anything not in the CRM
+- `Engagement-Log.md` — qualitative notes not captured in CRM activities
+- `Open-Items.md` — commitments and open questions
+
+Local notes supplement CRM data — they capture what sellers know but don't put in the CRM.
+
+**If neither CRM nor local notes are available**, ask the rep to describe the deal before scoring.
 
 ### Step 2: Score Each MEDDIC Dimension
 

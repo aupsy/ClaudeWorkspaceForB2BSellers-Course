@@ -1,8 +1,6 @@
 ---
 name: pipeline-review
 description: Generate a weekly pipeline review report. Analyzes deal stages, flags at-risk deals, and produces a formatted report ready for manager 1:1s.
-invocation: /pipeline-review
-example_usage: /pipeline-review 2026-03-11
 ---
 
 # Pipeline Review Skill
@@ -13,12 +11,37 @@ Generate a weekly pipeline snapshot. Usage: `/pipeline-review [date]`
 
 When invoked, do the following:
 
-### Step 1: Gather Pipeline Data
+### Step 1: Query Your CRM (Primary Source)
 
-Ask the rep to provide their pipeline data in one of these ways:
-- **Option A**: Paste a CSV or table from Salesforce/CRM
-- **Option B**: List deals manually in the format: `[Account] | [Stage] | [ARR] | [Close Date] | [Last Activity]`
-- **Option C**: Say "read from my account folders" — in which case scan all folders in `Accounts/` and extract deal status from each `Account-Overview.md`
+Use the CRM MCP server to fetch the rep's open pipeline live:
+
+```soql
+SELECT Id, Name, StageName, Amount, CloseDate, Probability,
+       NextStep, LastActivityDate, LastStageChangeDate,
+       Account.Name, Account.Industry,
+       Owner.Name
+FROM Opportunity
+WHERE OwnerId = :currentUserId
+  AND IsClosed = false
+ORDER BY CloseDate ASC
+```
+
+Also fetch recent activities to assess deal health:
+```soql
+SELECT WhatId, MAX(ActivityDate) lastActivity
+FROM Task
+WHERE OwnerId = :currentUserId
+  AND ActivityDate >= LAST_N_DAYS:60
+GROUP BY WhatId
+```
+
+**If your CRM is not Salesforce**, query the equivalent objects (HubSpot Deals, Dynamics Opportunities) via the configured MCP server.
+
+**If MCP is not configured**, fall back to asking the rep to provide data:
+- Paste a CSV/table export from their CRM, or
+- List deals manually as: `[Account] | [Stage] | [ARR] | [Close Date] | [Last Activity]`
+
+Flag clearly that CRM data is not live when using the fallback.
 
 ### Step 2: Read Context Files
 

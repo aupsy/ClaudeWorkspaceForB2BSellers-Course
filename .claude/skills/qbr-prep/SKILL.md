@@ -1,8 +1,6 @@
 ---
 name: qbr-prep
 description: Generate a QBR (Quarterly Business Review) narrative and agenda for a customer. Pulls from account history, product roadmap, and engagement logs.
-invocation: /qbr-prep
-example_usage: /qbr-prep Acme Corp
 ---
 
 # QBR Prep Skill

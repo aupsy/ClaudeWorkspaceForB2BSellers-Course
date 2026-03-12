@@ -101,6 +101,22 @@ This file loads automatically every session. It defines who we are, what success
 
 ---
 
+## Data Architecture
+
+**Your CRM is the system of record for deals.** This workspace does not sync or store CRM data — it queries your CRM live via MCP so your org's sharing rules and RBAC are always respected. Each seller connects with their own credentials and only sees what they have access to in the CRM.
+
+| What lives here (git) | What lives in your CRM | What stays local only |
+|----------------------|----------------------|----------------------|
+| Shared knowledge (product, compete, plays) | Opportunities, contacts, activities | Account qualitative notes (`Accounts/`) |
+| Skills and automation | Pipeline and forecast data | Generated pipeline reports |
+| Win/loss retrospectives | Deal history | |
+
+**`Accounts/` folders are for qualitative context that doesn't belong in your CRM** — political dynamics, relationship nuance, stakeholder motivations. They are gitignored and never shared. Skills use CRM data as the primary source and supplement with local notes when present.
+
+See `SALESFORCE-SETUP.md` (or the relevant section for your CRM) to connect your CRM.
+
+---
+
 ## Document Naming Convention
 
 Use YYYYMMDD timestamps for strategic docs: `document-name-20260120.md`

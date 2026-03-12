@@ -30,13 +30,10 @@ Open `CLAUDE.md` and fill in all the `[FILL IN]` sections:
 
 This file loads automatically every Claude session. Filling it in once means you never have to re-explain context.
 
-### Step 3 — Add Your Accounts
-For each active account:
-1. Copy `Accounts/_template/` → `Accounts/[Account Name]/`
-2. Fill in `Account-Overview.md` with everything you know
-3. Log your first notes in `Engagement-Log.md`
+### Step 3 — Connect Your CRM
+Follow `SALESFORCE-SETUP.md` to connect Salesforce (or the relevant section for HubSpot or Dynamics). This takes ~15 minutes and unlocks live CRM queries — no manual data entry needed.
 
-That's it. Start using skills like `/call-prep Acme Corp` immediately.
+That's it. Run `/call-prep Acme Corp` and Claude will pull the live opportunity, contacts, and activity from your CRM automatically.
 
 ---
 
@@ -75,21 +72,28 @@ That's it. Start using skills like `/call-prep Acme Corp` immediately.
 
 ---
 
-## The Value of Account Folders
+## Data Architecture: CRM + Workspace
 
-Every note you log in `Accounts/[Name]/Engagement-Log.md` becomes context Claude can use. The more you log, the better every skill performs. Think of it as a compound interest account — small deposits now pay off exponentially when you need to prep for an exec meeting or hand off an account.
+**Your CRM is the system of record.** This workspace doesn't sync or duplicate CRM data — it queries live via MCP using your credentials, so your org's sharing rules and RBAC are always respected. What seller A can't see in the CRM, they can't see here.
 
-**Golden rule**: Log call notes within 24 hours. Use the `Engagement-Log.md` template — it takes 5 minutes.
+| Lives in this repo (shared) | Lives in your CRM (live) | Stays local only (gitignored) |
+|----------------------------|-------------------------|------------------------------|
+| Product, competitive intel, plays | Opportunities, contacts, activities | `Accounts/` qualitative notes |
+| Skills and automation | Pipeline and deal history | Generated pipeline reports |
+| Win/loss retrospectives | | |
+
+**Account folders are for context that doesn't belong in your CRM** — political dynamics, relationship nuance, things you'd never log in Salesforce. They're gitignored by default and never shared with teammates.
 
 ---
 
 ## Team Usage
 
 This works best as a shared team repo:
-- Each rep maintains their own account folders
-- Competitive intel and plays are shared in `Knowledge/`
-- Win/loss write-ups in `Win-Loss/` become team learning
-- PRs for battle card updates = lightweight knowledge management
+- **Shared knowledge** lives in `Knowledge/` — every rep benefits from updated battle cards and plays
+- **Each seller connects their own CRM credentials** — they see only their accounts, no cross-territory leakage
+- **Account notes are local** — never committed, never visible to teammates
+- **Win/loss write-ups** are the exception — these are authored retrospectives (not CRM data) and are worth sharing
+- PRs for battle card and objection handling updates = lightweight team knowledge management
 
 ---
 

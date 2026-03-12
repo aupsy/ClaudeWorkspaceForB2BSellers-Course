@@ -6,12 +6,22 @@ Thumbs.db
 .vscode/settings.json
 *.swp
 
-# Sensitive files — never commit these
-*.env
+# Credentials — never commit these
+.env
 secrets/
 credentials/
 
-# Pipeline exports (keep generated reports, not raw exports)
+# Account folders — local only
+# CRM data stays in your CRM. Account folders are for qualitative notes
+# that don't belong in your CRM (political context, relationship nuance, etc.)
+# _template/ and README.md are committed; actual account folders are not.
+Accounts/[!_]*/
+
+# Generated pipeline reports — derived from CRM data, local only
+Pipeline/Weekly-Reviews/*.md
+Pipeline/Forecasts/*.md
+
+# Raw CRM exports
 Pipeline/*.csv
 Pipeline/*.xlsx
 

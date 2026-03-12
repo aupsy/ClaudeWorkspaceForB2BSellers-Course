@@ -1,8 +1,6 @@
 ---
 name: competitive-intel
 description: Pull competitive battle card context for any competitor. Returns positioning, strengths/weaknesses, landmine questions, and how to handle their attacks on us.
-invocation: /competitive-intel
-example_usage: /competitive-intel Competitor Corp
 ---
 
 # Competitive Intel Skill

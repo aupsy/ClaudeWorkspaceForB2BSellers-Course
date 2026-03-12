@@ -1,8 +1,6 @@
 ---
 name: email-drafter
 description: Draft a personalized, context-aware follow-up email for any account. Reads account history and engagement log to write emails that feel human, not templated.
-invocation: /email-drafter
-example_usage: /email-drafter Acme Corp follow up on security questionnaire and send pricing
 ---
 
 # Email Drafter Skill

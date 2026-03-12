@@ -16,15 +16,15 @@ Complete these steps in order to get full value from this workspace.
 
 ---
 
-## Phase 2 — Top Accounts (~1 hr for first 5 accounts)
+## Phase 2 — Connect Your CRM (~15 min)
 
-For each of your top 5-10 active opportunities:
-- [ ] Copy `Accounts/_template/` → `Accounts/[Account Name]/`
-- [ ] Fill in `Account-Overview.md` (company, stakeholders, deal status, history)
-- [ ] Add recent call notes to `Engagement-Log.md`
-- [ ] Add open action items to `Open-Items.md`
+- [ ] Follow `SALESFORCE-SETUP.md` (or the HubSpot / Dynamics 365 section if applicable)
+- [ ] Copy `.env.example` → `.env` and fill in your credentials (`.env` is gitignored — never commit it)
+- [ ] Verify the connection: ask Claude "Query my open opportunities from CRM"
 
-**Test**: Run `/call-prep [Account Name]` — you should get a useful 1-page briefing.
+**Test**: Run `/call-prep [Account Name]` — Claude should pull live opportunity data, contacts, and recent activity directly from your CRM. No manual data entry needed.
+
+**Note on account folders**: `Accounts/` folders are optional and gitignored. Use them for qualitative context that doesn't belong in your CRM — political dynamics, relationship nuance, personal observations. Skills work fully from CRM data alone; account notes are a supplement.
 
 ---
 

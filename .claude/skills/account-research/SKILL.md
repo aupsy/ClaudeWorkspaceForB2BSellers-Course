@@ -1,8 +1,6 @@
 ---
 name: account-research
 description: Research a company using public sources. Returns a company snapshot, recent news, inferred pain points, and outreach hooks tailored to your product.
-invocation: /account-research
-example_usage: /account-research Sandvik Coromant
 ---
 
 # Account Research Skill
