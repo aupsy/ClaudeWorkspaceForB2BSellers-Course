@@ -21,17 +21,22 @@ cd sales-workspace
 code .
 ```
 
-### Step 2 — Fill In CLAUDE.md
-Open `CLAUDE.md` and fill in all the `[FILL IN]` sections:
-- Your company and product
-- Your ICP and deal parameters
-- Your team OKRs and quota
-- Your sales methodology
+### Step 2 — Hydrate Your Knowledge Base
+Point Claude at your existing sales materials and it will auto-populate the Knowledge/ templates:
 
-This file loads automatically every Claude session. Filling it in once means you never have to re-explain context.
+```
+/hydrate website https://www.yourproduct.com
+/hydrate seismic "Pitch Decks/Enterprise"
+/hydrate folder "C:/path/to/sales/materials"
+/hydrate all    ← interactive, walks through all sources
+```
+
+Supported sources: product website, documentation URL, local folder, Seismic. Each hydration fills in `[FILL IN]` placeholders and marks everything for your review — no silent overwrites.
+
+Then fill in `CLAUDE.md` with the internal details hydration can't know (your quota, team structure, methodology).
 
 ### Step 3 — Connect Your CRM
-Follow `SALESFORCE-SETUP.md` to connect Salesforce (or the relevant section for HubSpot or Dynamics). This takes ~15 minutes and unlocks live CRM queries — no manual data entry needed.
+Follow `SALESFORCE-SETUP.md` to connect Salesforce, HubSpot, or Dynamics 365 (~15 min). Each seller connects with their own credentials so your org's sharing rules are always respected.
 
 That's it. Run `/call-prep Acme Corp` and Claude will pull the live opportunity, contacts, and activity from your CRM automatically.
 

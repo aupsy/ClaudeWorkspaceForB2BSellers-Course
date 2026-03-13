@@ -6,11 +6,33 @@ Complete these steps in order to get full value from this workspace.
 
 ## Phase 1 — Core Context (Do This First, ~30 min)
 
-- [ ] Fill in `CLAUDE.md` — all `[FILL IN]` sections
-- [ ] Fill in `Knowledge/product/Product-Overview.md` — your product, differentiators, ICP
-- [ ] Fill in `Knowledge/product/Pricing-and-Packaging.md` — deal structures and tiers
-- [ ] Fill in `Knowledge/org/Team-Context.md` — your team structure and territory
-- [ ] Fill in `Knowledge/metrics/Sales-OKRs.md` — your quota and OKRs
+Start with hydration — it auto-populates the Knowledge/ templates from your real sales materials, so you're filling gaps rather than starting from scratch.
+
+### Option A: Hydrate from sources (recommended, ~15 min)
+
+Run one or more of these in Claude Code:
+```
+/hydrate website https://www.yourproduct.com
+/hydrate docs https://docs.yourproduct.com
+/hydrate folder "C:/path/to/your/sales/materials"
+/hydrate seismic "Pitch Decks/Enterprise"
+/hydrate all    ← interactive, walks through all sources
+```
+
+After hydration, review the populated files and fill any remaining gaps.
+
+### Option B: Fill in manually (~30 min)
+
+If you don't have accessible sources, fill these in directly:
+- [ ] `Knowledge/product/Product-Overview.md` — your product, differentiators, ICP
+- [ ] `Knowledge/product/Pricing-and-Packaging.md` — deal structures and tiers
+- [ ] `Knowledge/org/Team-Context.md` — your team structure and territory
+- [ ] `Knowledge/metrics/Sales-OKRs.md` — your quota and OKRs
+
+### Either way, complete these manually (internal info not in public sources):
+- [ ] Fill in `CLAUDE.md` — team name, methodology, OKR numbers
+- [ ] Set your quota in `Knowledge/metrics/Sales-OKRs.md`
+- [ ] Add discount authority to `Knowledge/product/Pricing-and-Packaging.md`
 
 **Test**: Open Claude Code and ask "What do I sell and who is my ICP?" — Claude should answer from your context.
 

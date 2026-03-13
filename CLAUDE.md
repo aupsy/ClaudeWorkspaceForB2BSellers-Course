@@ -82,6 +82,7 @@ This file loads automatically every session. It defines who we are, what success
 
 | Skill | Invocation | What it does |
 |-------|------------|-------------|
+| **Hydrate** | `/hydrate [source] [location]` | Bootstrap Knowledge/ from website, docs, folder, or Seismic — run this first |
 | Call Prep | `/call-prep [Account Name]` | 1-page briefing before any call |
 | Pipeline Review | `/pipeline-review [date]` | Weekly pipeline snapshot with risk flags |
 | Deal Health | `/deal-health [Account Name]` | MEDDIC scoring + next actions |

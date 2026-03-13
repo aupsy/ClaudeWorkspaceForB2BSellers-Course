@@ -181,6 +181,47 @@ CRM: Microsoft Dynamics 365
 
 ---
 
+## Seismic Setup (~5 minutes)
+
+Used by the `/hydrate seismic` command to pull pitch decks, battle cards, and playbooks from your Seismic library into the Knowledge/ base.
+
+### Step 1 — Get your API token
+
+1. Log into Seismic
+2. Click your avatar (top right) → **Settings** → **Integrations** → **API Access**
+3. Generate a new token (or use an existing personal access token)
+4. Copy the token value
+
+> If you don't see API Access in settings, ask your Seismic admin to enable API access for your account.
+
+### Step 2 — Find your tenant URL
+
+Your Seismic tenant URL is the domain you use to log in — e.g., `yourcompany.seismic.com`. Do not include `https://`.
+
+### Step 3 — Configure your credentials
+
+In your `.env`:
+
+```
+SEISMIC_TENANT=yourcompany.seismic.com
+SEISMIC_TOKEN=your_bearer_token
+```
+
+### Step 4 — Find the folder path to hydrate from
+
+In Seismic, navigate to the folder containing your pitch decks / battle cards. The folder path is the breadcrumb trail at the top of the page, e.g., `Enterprise Sales/Pitch Decks` or `Competitive/Battle Cards`.
+
+### Step 5 — Run hydration
+
+```
+/hydrate seismic "Enterprise Sales/Pitch Decks"
+/hydrate seismic "Competitive/Battle Cards"
+```
+
+Run multiple times for different folders. Each run adds to (not overwrites) what's already in Knowledge/.
+
+---
+
 ## Troubleshooting
 
 **"Authentication failed" (Salesforce)**
