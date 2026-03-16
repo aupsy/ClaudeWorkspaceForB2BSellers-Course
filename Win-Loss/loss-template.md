@@ -69,3 +69,15 @@ In retrospect, was this a winnable deal? Why / why not?
 
 - [Signal 1 — e.g., "When they say 'we're also talking to [Competitor]' and go quiet for 2 weeks, escalate immediately"]
 - [Signal 2]
+
+---
+
+## Knowledge Updates Triggered
+
+*Populated by `/retro`. `/knowledge-health` reads this table to surface pending updates.*
+
+| Insight tag | Target file | Status |
+|------------|-------------|--------|
+| [competitive] | | Pending |
+| [product-gap] | | Pending |
+| [objection] | | Pending |

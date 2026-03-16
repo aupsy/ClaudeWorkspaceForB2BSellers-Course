@@ -1,3 +1,12 @@
+---
+knowledge_type: procedural
+refresh_frequency: on-event
+last_updated: YYYY-MM-DD
+source: field
+owner: rep
+stale_after_days: 180
+---
+
 # Objection Handling
 
 Common objections and proven responses. Adapt to your product and customer context.

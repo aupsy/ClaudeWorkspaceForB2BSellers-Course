@@ -137,6 +137,10 @@ For each dimension, rate: **Strong (Green)** / **Partial (Yellow)** / **Missing 
 2. [Risk 2]
 3. [Risk 3]
 
+[If a competitor is identified in this deal AND their battle card is missing or stale (last_updated > stale_after_days), add one more risk bullet:]
+
+- **Knowledge gap**: Battle card for [Competitor] is [missing / [N] days old — threshold: 90 days]. Run `/competitive-intel [Competitor]` before your next call to make sure you're current.
+
 ### Recommended Next Actions
 
 The 3 most impactful things to do in the next 2 weeks:

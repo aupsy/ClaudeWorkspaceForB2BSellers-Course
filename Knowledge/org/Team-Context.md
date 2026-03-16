@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: quarterly
+last_updated: YYYY-MM-DD
+source: manual
+owner: rep
+stale_after_days: 90
+---
+
 # Team Context
 
 *Last updated: [YYYY-MM-DD]*

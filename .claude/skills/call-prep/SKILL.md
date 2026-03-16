@@ -101,6 +101,15 @@ These supplement the CRM data — they capture what sellers know but don't (or s
 - For early-stage deals, read `Knowledge/plays/Discovery-Framework.md` for suggested questions
 - Read `Knowledge/product/Product-Overview.md` only if needed to frame product context
 
+For each Knowledge/ file read in this step, check its frontmatter `last_updated` vs. `stale_after_days`. If a file is overdue (days since `last_updated` > `stale_after_days`), add a single callout in the briefing output directly below the section that uses it:
+
+```
+> Note: [filename] was last updated [N] days ago (threshold: [stale_after_days] days).
+> Verify before relying on this for today's call — run /knowledge-health for details.
+```
+
+Only show this warning when a file is actually overdue. Do not add it to clean briefings where all files are current.
+
 ### Step 6: Generate the Briefing
 
 ---

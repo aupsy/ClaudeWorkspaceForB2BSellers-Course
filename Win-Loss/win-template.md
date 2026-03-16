@@ -70,3 +70,15 @@
 - **Contact**: [Name, title]
 - **Best use cases**: [e.g., "Great for Financial Services or Salesforce ecosystem conversations"]
 - **Their headline stat**: [e.g., "Reduced rep research time by 60% in first 60 days"]
+
+---
+
+## Knowledge Updates Triggered
+
+*Populated by `/retro`. `/knowledge-health` reads this table to surface pending updates.*
+
+| Insight tag | Target file | Status |
+|------------|-------------|--------|
+| [competitive] | | Pending |
+| [process] | | Pending |
+| [messaging] | | Pending |

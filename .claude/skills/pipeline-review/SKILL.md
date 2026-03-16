@@ -123,7 +123,29 @@ Top 3 actions to improve pipeline health:
 
 ---
 
-### Step 4: Ask for Review
+### Step 4: Knowledge Health Pulse
+
+Before the final report, do a quick freshness check on the two knowledge files most likely to affect deal outcomes this week:
+
+1. **Pricing-and-Packaging.md** — check `last_updated` vs. `stale_after_days: 30` in frontmatter
+2. Any battle card (`Knowledge/compete/[Competitor].md`) for competitors that appear in the current pipeline — check `last_updated` vs. `stale_after_days: 90`
+
+If any are stale (🟡 Aging or 🔴 Overdue), append a two-row table at the bottom of the pipeline report:
+
+```markdown
+### Knowledge Health (Quick Check)
+
+| File | Status | Note |
+|------|--------|------|
+| Pricing-and-Packaging.md | 🟡 Aging ([N] days old) | Verify before any Negotiation-stage calls this week |
+| compete/[Competitor].md | 🔴 Overdue ([N] days old) | [Competitor] is in [N] active deals — battle card may be stale |
+
+Run /knowledge-health for the full dashboard.
+```
+
+**Only include rows for files that are actually stale.** If everything is current (🟢), omit this section entirely — don't clutter pipeline reports that don't need the warning.
+
+### Step 5: Ask for Review
 
 "Here's your pipeline review. A few questions before your 1:1:
 - Are there any deals I'm missing or that have changed status?

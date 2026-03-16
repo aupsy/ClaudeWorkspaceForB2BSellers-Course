@@ -1,3 +1,12 @@
+---
+knowledge_type: procedural
+refresh_frequency: manual
+last_updated: YYYY-MM-DD
+source: team
+owner: manager
+stale_after_days: 180
+---
+
 # Process Guide
 
 Practical guidance for the processes every rep needs to navigate.

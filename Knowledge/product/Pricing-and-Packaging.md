@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: monthly
+last_updated: YYYY-MM-DD
+source: pmm
+owner: pmm
+stale_after_days: 30
+---
+
 # Pricing & Packaging
 
 *Last updated: [YYYY-MM-DD] — Keep this current. Outdated pricing causes awkward deal moments.*

@@ -96,3 +96,24 @@ Then:
 - What are they claiming in this deal?
 - What did the prospect say about [Competitor]?
 - Do you want me to draft a response to a specific attack they made?"
+
+### Step 6: Offer to Update the Battle Card
+
+After handling any deal-specific questions, offer to update the battle card if either:
+- The battle card was flagged as stale (🟡 or 🔴 in Step 2), OR
+- The rep mentioned anything new about the competitor during the conversation
+
+```
+One more thing — [this battle card is [X] days old / you mentioned [new intel about Competitor]].
+Want me to draft an update to the battle card with what you've shared?
+
+I'll follow the same safety rule as /hydrate: I'll show you the proposed change as a
+<!-- RETRO INSIGHT --> block before writing anything, and you confirm before it goes in.
+
+Keeping this current helps the next rep who runs into [Competitor] in a deal.
+```
+
+If the rep confirms:
+- Draft the proposed change as a `<!-- RETRO INSIGHT — Manual update [YYYY-MM-DD] -->` block
+- Show the exact text for review
+- After approval, apply the edit and update `last_updated` in the frontmatter to today's date

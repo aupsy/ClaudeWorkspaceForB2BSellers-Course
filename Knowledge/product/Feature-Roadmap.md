@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: monthly
+last_updated: YYYY-MM-DD
+source: pmm
+owner: pmm
+stale_after_days: 60
+---
+
 # Feature Roadmap
 
 *Last updated: [YYYY-MM-DD] — Refresh quarterly or after major product announcements.*

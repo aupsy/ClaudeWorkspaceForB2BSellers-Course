@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: manual
+last_updated: YYYY-MM-DD
+source: team
+owner: manager
+stale_after_days: 365
+---
+
 # Metric Definitions
 
 Standard definitions for the metrics we track. Use these consistently in pipeline reviews, forecasts, and QBRs.

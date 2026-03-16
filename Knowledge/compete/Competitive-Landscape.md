@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: monthly
+last_updated: YYYY-MM-DD
+source: field
+owner: rep
+stale_after_days: 60
+---
+
 # Competitive Landscape
 
 *Last updated: [YYYY-MM-DD]*

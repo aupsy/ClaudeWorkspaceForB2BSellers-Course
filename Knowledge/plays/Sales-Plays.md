@@ -1,3 +1,12 @@
+---
+knowledge_type: procedural
+refresh_frequency: quarterly
+last_updated: YYYY-MM-DD
+source: field
+owner: rep
+stale_after_days: 180
+---
+
 # Sales Plays
 
 Proven plays for common situations. Adapt to your product and segment.

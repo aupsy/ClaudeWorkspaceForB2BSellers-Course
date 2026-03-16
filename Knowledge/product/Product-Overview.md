@@ -1,3 +1,12 @@
+---
+knowledge_type: descriptive
+refresh_frequency: quarterly
+last_updated: YYYY-MM-DD
+source: pmm
+owner: pmm
+stale_after_days: 90
+---
+
 # Product Overview
 
 *Last updated: [YYYY-MM-DD]*

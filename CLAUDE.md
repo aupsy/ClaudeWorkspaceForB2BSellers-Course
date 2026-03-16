@@ -49,6 +49,32 @@ This file loads automatically every session. It defines who we are, what success
 
 ---
 
+## Knowledge Taxonomy
+
+This workspace distinguishes two types of knowledge with different improvement mechanisms.
+
+**Descriptive knowledge** ("what is") — facts about product, pricing, competitors, market. Comes from external sources (PMM, product team, competitor research). Goes stale when the world changes.
+- Files: `product/`, `compete/`, `metrics/`
+- Improve with: `/hydrate` to auto-refresh from public sources, PMM updates, `/competitive-intel`
+- Each file has a `stale_after_days` threshold — `/knowledge-health` shows what's overdue
+
+**Procedural knowledge** ("how we do it") — discovery methods, objection handling, plays. Comes from field experience. Improves when we extract learnings from closed deals.
+- Files: `plays/`, `org/Process-Guide.md`
+- Improve with: `/retro` after every win or loss
+
+**The self-improvement loop:**
+```
+Deal closes → /retro [Account Name]
+  → insights tagged [competitive / process / messaging / objection / play]
+  → mapped to specific Knowledge/ files → retro doc written with update tracker
+→ /knowledge-health → freshness dashboard + competitor gaps + pending retro insights
+→ /hydrate → auto-refresh stale descriptive files from public sources
+```
+
+**Run `/knowledge-health` monthly. Run `/retro` after every closed deal.**
+
+---
+
 ## Priority Framework
 
 - **P0**: Customer commitments, active deal decisions, manager requests with deadlines
@@ -90,6 +116,8 @@ This file loads automatically every session. It defines who we are, what success
 | Competitive Intel | `/competitive-intel [Competitor]` | Battle card retrieval |
 | QBR Prep | `/qbr-prep [Account Name]` | Customer QBR narrative |
 | Email Drafter | `/email-drafter [Account Name] [context]` | Context-aware follow-up email |
+| **Retro** | `/retro [Account Name] [won\|lost]` | Win/loss retrospective → extracts insights → updates Knowledge/ |
+| **Knowledge Health** | `/knowledge-health` | Freshness dashboard — stale files, competitor gaps, pending retro insights |
 
 ---
 

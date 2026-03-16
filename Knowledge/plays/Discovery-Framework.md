@@ -1,3 +1,12 @@
+---
+knowledge_type: procedural
+refresh_frequency: quarterly
+last_updated: YYYY-MM-DD
+source: team
+owner: team
+stale_after_days: 180
+---
+
 # Discovery Framework
 
 A structured approach to discovery using MEDDIC. Use this as a guide, not a script — great discovery feels like a conversation, not an interrogation.
