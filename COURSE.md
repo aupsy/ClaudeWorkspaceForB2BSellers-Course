@@ -1,258 +1,372 @@
-# Course Guide: Claude Cowork for Sales Reps
+# Modern Selling in the Age of AI — Cowork Workspace Guide
 
-This guide maps each course module to the pre-built skills in this workspace. Instead of building skills from scratch during class, you'll customize and use skills that are already production-ready — so every exercise produces something you can deploy the same day.
+This guide is your companion to the course. It maps each module to the pre-built skills in this workspace and shows you exactly what to run, when, and what to expect. Keep it open alongside the course session.
 
-**How to use this guide**: Keep it open alongside the course slides. At each module's hands-on segment, jump to the relevant section below for the specific commands to run.
+**How this workspace fits the course:**
+- **Modules 1–3** (Chat + Projects): These exercises work directly in Claude chat — no workspace setup required. The workspace is running in the background.
+- **Modules 4–5** (Cowork): These exercises use the skills in this workspace. By now you've loaded your context; the workspace becomes your autonomous colleague.
+
+**Before Module 4**: Make sure you've completed `COURSE-SETUP.md` — it's the 15-minute workspace setup that makes the Module 4-5 exercises work.
 
 ---
 
 ## Module 1: The AI Seller Shift (60 min)
 
-**What you're doing in the repo**: First setup + first account brief.
+**Coaching truth**: Buyers in 2026 arrive having done 70% of their research. They don't need you to explain your product — they need you to tell them something they don't already know about *their own situation*. Insight-led openers win. "Tell me about your business" does not.
 
-### In-class exercise (10 min hands-on)
+**What Claude removes**: The 45 minutes of manual research that would have been necessary to build the brief that makes an insightful opener possible.
 
-Follow `COURSE-SETUP.md` if you haven't already. Then:
+### In-class exercise: Your first account brief (10 min)
+
+**Step 1 — Claude Projects setup** (if not already done):
+1. Claude Desktop → **Projects** → **New Project: "My Territory"**
+2. Upload: your ICP definition (a rough paragraph works), your product one-pager or key value props, and 3 high-performing emails from yourself or a top teammate
+3. Set instructions: your name, role, tone preferences ("direct and consultative, no jargon")
+
+**Step 2 — First account brief**:
+In the Project chat, type:
+```
+Create a one-page account brief for [Company] — cover business overview, key executives,
+recent news in the last 90 days, likely pain points, and a suggested insight-led opening
+talk track for a first call.
+```
+
+**What good output looks like**: A specific brief with named executives, a real trigger event (funding, leadership change, expansion, product launch), a pain hypothesis tied to your solution, and an opener you wouldn't have written without this research.
+
+**If it feels generic**: Your Project needs more context. Add your product one-pager and re-run.
+
+### Workspace setup (runs in parallel with M1)
+
+Complete `COURSE-SETUP.md` (15 min). This loads your product knowledge into the workspace's skills so that `/account-research`, `/email-drafter`, and `/post-call` understand your business. You'll need this for Modules 4–5.
 
 ```
-/account-research [name of a real prospect in your pipeline]
+/hydrate website [your product homepage URL]
 ```
-
-**What good output looks like**: A one-page brief with company snapshot, key exec names and titles, recent news (last 90 days), inferred pain points mapped to your solution, and 5 discovery questions.
-
-**If it feels generic**: You need more product context. Run:
-```
-/hydrate website [your product homepage]
-```
-Then re-run the account research. The brief should be noticeably more specific.
 
 ### Module 1 deliverable
-One live account brief for a real prospect. Not a demo — something you'd actually use tomorrow.
+One live account brief for a real prospect — with a rewritten insight-led opener based on what you learned. Not a demo account. One you'd actually use tomorrow.
 
 ---
 
-## Module 2: Account Intelligence in Minutes (60 min)
+## Module 2: Account Intelligence — Discovery Is a Research Problem (60 min)
 
-**What you're doing in the repo**: Understand how a skill is built, customize it to your output preferences, add a competitor battle card.
+**Coaching truth**: Discovery quality is a research problem as much as a questioning technique problem. You cannot ask insightful questions about a business you don't understand. The Orientation → Exploration → Advancement framework gives you the sequence; the account research Skill gives you the raw material.
 
-### In-class exercise A: Read and customize the account-research skill (15 min)
+- **Orientation**: Open with a credibility statement that earns the right to ask hard questions — show you understand their situation before asking them to explain it
+- **Exploration**: Current state → Business impact → What would change if that problem went away? Never jump to pain without earning it
+- **Advancement**: Summarize in their exact words; set the next step live, before you hang up
 
-Open `.claude/skills/account-research/SKILL.md` in the file tree.
+**What Claude removes**: The inconsistency. Reps who do this research manually do it well sometimes, skip it when busy. A Skill makes the excellent version automatic.
 
-Read through the steps. Find **Step 3: Generate the Research Brief** — the output format section. Customize the section headers and order to match how you actually like to prep for calls. Common customizations:
-- Reorder sections (some reps want competitive watch first)
-- Add a "Forecast/ICP Fit Score" section
-- Change discovery question count (5 → 3 for shorter calls)
+### In-class exercise A: Build or customize the account-research Skill (15 min)
 
-Save the file. Run `/account-research [another prospect]` — you should see your customizations reflected.
+Open `.claude/skills/account-research/SKILL.md` in the workspace file tree.
 
-### In-class exercise B: Build a battle card (10 min)
+Read through **Step 3: Generate the Research Brief** — the output format section. Customize it to how you actually like to prep:
+- Reorder sections (some reps want competitive context first)
+- Add a discovery question format aligned to the Orientation → Exploration → Advancement framework
+- Change discovery question count (5 → 3 for shorter calls, 7 for enterprise)
 
-Run:
+Save the file. Run:
 ```
-/hydrate website [your main competitor's homepage URL]
+/account-research [a second prospect from your pipeline]
+```
+You should see your customizations reflected.
+
+### In-class exercise B: Discovery roleplay (10 min)
+
+After generating an account brief, use `Course-Materials/discovery-roleplay-prompt.md` as a sparring partner. Copy the prompt, paste it into Claude chat (not the workspace skill — just plain chat), and replace `[Company]` and `[Title]` with the account you just researched:
+
+```
+Act as a skeptical [Title] at [Company]. You've agreed to a 20-minute discovery call.
+You're evaluating three vendors. You don't love being sold to.
+Answer my discovery questions honestly but with appropriate resistance.
+After I'm done, score my performance on: insight-led opener, question quality,
+whether I listened or just moved on, and quality of my next-step close.
 ```
 
-Claude visits the competitor's site and auto-populates `Knowledge/compete/[Competitor].md` with their positioning, likely strengths, and messaging. Then:
-```
-/competitive-intel [competitor name]
-```
+This is private, non-judgmental practice. The coaching note it produces feeds into your self-awareness — and into the Self-Coaching Scorecard we'll use in Module 4.
 
-You'll see the battle card. It'll be a rough first pass — you'll refine it over the next few weeks as you encounter them in deals.
+### The SPEAR check (5 min)
+
+Before leaving Module 2, use `Course-Materials/spear-framework.md` to identify one more workflow in your week that should become a Skill. Any workflow scoring 3+ out of 5 is worth building.
 
 ### Module 2 deliverable
-- Customized `account-research` SKILL.md (your preferred output format)
-- One competitor battle card in `Knowledge/compete/`
+- Customized `account-research` SKILL.md (your preferred output format + O→E→A discovery questions)
+- One Claude-coached discovery roleplay with a written scorecard
 
 ---
 
 ## Module 3: Outreach That Gets Responses (60 min)
 
-**What you're doing in the repo**: Customize the email-drafter skill to your voice, generate a real outreach sequence.
+**Coaching truth**: Buyers choose sellers they trust over sellers with the best product. Trust is built through demonstrated understanding — not charm, not persistence, not a clever subject line. *Insight personalization* (showing you understand their specific business situation) is what creates that trust. *Surface personalization* (Michigan Wolverines, mutual connections) signals shallow research.
 
-### In-class exercise A: Customize the email-drafter skill (15 min)
+**What Claude removes**: The 45 minutes of research per prospect that makes insight personalization impractical at scale. With an account brief already built, the email writes itself — contextualized by real trigger events.
+
+### In-class exercise A: The Personalization Audit (10 min)
+
+Option 1 — Use your own emails: Pull your last 10 sent cold emails and paste them into Claude chat with this prompt:
+```
+Analyze these 10 cold emails I've sent. For each one, score it 1–5 on:
+- Specificity of the trigger referenced (1 = generic, 5 = highly specific)
+- Quality of the problem hypothesis (1 = feature push, 5 = genuine business insight)
+- CTA quality (1 = vague "let me know", 5 = specific, low-friction ask)
+Then tell me: what patterns do you see? What would the best rep at my company do differently?
+```
+
+Option 2 — Use the sample set: Open `Course-Materials/sample-cold-emails.md`. Paste the 10 sample emails with the same prompt above. The patterns it finds will be the same ones it would find in most reps' real outboxes.
+
+Either way: the score usually stings. The gap creates the motivation to build the outreach Skill properly.
+
+### In-class exercise B: Customize the email-drafter Skill (15 min)
 
 Open `.claude/skills/email-drafter/SKILL.md`.
 
-Find **Step 3: Draft the Email(s)**. This step already includes format instructions, but you should add:
+Find **Step 3: Draft the Email(s)**. Add three customizations:
 
-1. **Your banned phrases** — add a line like:
+1. **Your banned phrases**:
    ```
    Banned phrases: "Hope this finds you well", "I came across your profile",
    "I'd love to connect", "circle back", "touch base", any phrase with "synergy"
    ```
 
-2. **Your preferred CTAs** — replace the generic CTA library with your actual go-tos:
+2. **Your preferred CTAs** (replace the generic library):
    ```
    Preferred CTAs (use one per email):
    - "Worth a 15-minute call this week?"
-   - "Happy to send over a 2-minute overview video first if helpful."
-   - "Are you the right person to talk to, or should I reach out to someone else on your team?"
+   - "Happy to send a 2-minute overview video first if helpful."
+   - "Are you the right person to talk to, or should I reach out to someone else?"
    ```
 
 3. **Your sign-off** — whatever you actually use.
 
 Save the file.
 
-### In-class exercise B: Generate a real 3-email sequence (10 min)
+### In-class exercise C: Generate a 3-email sequence + LinkedIn message (10 min)
 
 Pick a real prospect you've been meaning to reach out to. Run:
 ```
 /email-drafter [Company Name] write a 3-email cold outreach sequence.
-Email 1: intro referencing [trigger — recent news, funding, job posting, etc].
-Email 2: value-led follow-up from a different angle.
-Email 3: soft breakup.
+Email 1 (Day 1): intro referencing [specific trigger — recent news, funding, job posting].
+Email 2 (Day 5): different angle, value-led.
+Email 3 (Day 12): soft breakup with a genuine question.
+Also write a LinkedIn connection request under 300 characters.
 ```
 
-The output should sound like you — because it's pulling your CLAUDE.md context, your product knowledge from `Knowledge/product/`, and the style customizations you just added.
+The output should sound like you — because it's pulling your CLAUDE.md context, `Knowledge/product/`, and the style customizations you just added.
 
-**Compare against the CRISP framework** from the slides. Where does the prompt above map to each letter?
+**CRISP check**: Use `Course-Materials/crisp-framework.md` to evaluate your prompt above. Where does it map to Context, Role, Instructions, Specifics, Format? Where is it weak?
 
 ### Module 3 deliverable
-- Customized `email-drafter` SKILL.md (your voice, your CTAs)
-- A 3-email cold outreach sequence for a real prospect
+- Completed Personalization Audit with a written reflection on what you'll change
+- Customized `email-drafter` SKILL.md (your voice, your CTAs, your banned phrases)
+- A 3-email sequence + LinkedIn message for a real prospect
 
 ---
 
-## Module 4: Pipeline Velocity — From Call to Closed (60 min)
+## Module 4: Pipeline Velocity — The Self-Coaching Loop (60 min)
 
-**What you're doing in the repo**: Process a call transcript into a structured summary, follow-up email, and coaching note. Score a stalled deal's MEDDIC health.
+**Coaching truth**: Reps improve fastest when feedback is specific, timely, and tied to actual conversations. The problem: most reps never get coached on their individual calls because managers don't have the capacity. This creates a skill plateau — reps repeat the same patterns indefinitely. The Self-Coaching Scorecard breaks the plateau.
 
-### In-class exercise A: Post-call workflow (20 min)
+**What Claude removes**: The 60–90 minutes of manual post-call work (CRM update, follow-up email, summary, notes) that is the most consistently skipped part of a rep's day. And the absence of coaching feedback that compounds over months into stalled skill development.
 
-**Option 1 — Use a sample transcript** (if you don't have a recent call to use):
+### In-class exercise A: The 360° Call Debrief (20 min)
 
-1. In the file tree, navigate to `Course-Materials/sample-transcripts/`
-2. Copy `discovery-call-enterprise.md` into `Accounts/Meridian/` (create the folder)
+This is the most powerful exercise in the course.
+
+**Step 1 — Self-score first** (5 min, no Claude):
+Open `Course-Materials/self-coaching-scorecard.md`. Score yourself on last week's best discovery call — honestly, before Claude sees anything.
+
+**Step 2 — Run the debrief** (2 min):
+
+*Option A — Use a sample transcript* (if you don't have a recent call):
+1. Navigate to `Course-Materials/sample-transcripts/`
+2. Copy `discovery-call-enterprise.md` into `Accounts/Meridian/` (create the folder if needed)
 3. Run:
    ```
-   /post-call Meridian
+   /post-call Meridian debrief
    ```
 
-**Option 2 — Use your own notes** (recommended if you had a call this week):
-
-1. Create a folder: `Accounts/[Your Account Name]/`
-2. Create a file in that folder: `call-notes-[today's date].md`
-3. Paste your notes (rough is fine — bullet points, timestamps, fragments all work)
-4. Run:
+*Option B — Use your own notes* (recommended if you had a call this week):
+1. Create `Accounts/[Account Name]/call-notes-[today's date].md`
+2. Paste your notes (rough is fine — bullet points, timestamps, fragments all work)
+3. Run:
    ```
-   /post-call [Your Account Name]
+   /post-call [Account Name] debrief
    ```
 
-**What you should get**:
-- Structured call summary (pain, buying signals, objections, next steps, deal risks)
-- CRM field update suggestions
-- Draft follow-up email
-- One coaching note
+**What you'll get**:
+- Scorecard scores with specific transcript evidence for each dimension
+- Talk-to-listen ratio estimate
+- Three moments where a question would have been stronger than a statement
+- Standard outputs: call summary, CRM update fields, follow-up email draft, coaching note
 
-Read the coaching note. Does it catch something you missed? What's the "quantifying question" the skill flags in the enterprise transcript?
+**Step 3 — Compare** (8 min): Where did Claude see something you missed? Where did your rep instinct beat the AI? Which gaps surprised you?
 
-### In-class exercise B: Deal health check (10 min)
+The coaching note in the enterprise transcript has a specific opportunity embedded — if the skill catches it, you'll know you're using it correctly.
 
-Pick a deal that's been stuck or that you're worried about. Run:
+### In-class exercise B: Proposal generation (10 min)
+
+Open `Course-Materials/sample-rfp.md` (the Meridian Industrial Group RFP). Then run:
 ```
-/deal-health [Account Name]
+Task: Generate a first-draft proposal for Meridian Industrial Group
+
+Inputs:
+- Course-Materials/sample-rfp.md (the RFP)
+- Course-Materials/sample-transcripts/discovery-call-enterprise.md (the discovery call)
+
+Deliver:
+- Executive summary tied to their stated priorities
+- Solution section mapped to their specific pain points from the discovery call
+- Business case using the numbers Sarah mentioned in the call
+- Why us vs. Highspot (the competitor they mentioned)
+
+Save as Accounts/Meridian/Meridian-Proposal-Draft-v1.md
 ```
 
-If CRM isn't connected: Claude will ask you to describe the deal. Give it a 3-4 sentence summary: stage, deal size, who you've met, what the pain is, what's blocking it.
+The coaching principle: a first draft that captures their language and their numbers is more persuasive than a polished template that doesn't.
 
-You'll get a MEDDIC scorecard with specific gaps flagged. The "Recommended Next Actions" section is the part worth deploying immediately.
+### In-class exercise C: Deal coaching on a stalled deal (10 min)
+
+*Option A — Your own stalled deal*: Describe a deal that's been stuck in 3-4 sentences (stage, deal size, who you've met, what the pain is, what's blocking it). Paste into Claude chat:
+```
+I've been working on [Company] for [X weeks].
+[Paste your deal context]
+
+Tell me:
+1. Top 3 risk factors for this deal not closing
+2. Questions I have not yet answered for the buyer
+3. What is the likely internal conversation happening on their side right now?
+4. What should my next move be?
+```
+
+*Option B — Sample stalled deal*: Open `Course-Materials/sample-deal-notes.md` (Thornwood Capital — 35 days stuck in Negotiation). Paste the notes with the same prompt above.
 
 ### Module 4 deliverable
+- Completed 360° Call Debrief with self-score vs. Claude score comparison
 - Post-call summary + follow-up email from a real or sample transcript
-- MEDDIC scorecard for a stalled deal with 3 specific next actions
+- First-draft proposal for Meridian (or your own account)
 
 ---
 
-## Module 5: Advanced Cowork — Your Autonomous Sales Agent (60 min)
+## Module 5: The AI Seller Mindset — Amplifier, Not Crutch (60 min)
 
-**What you're doing in the repo**: Run a full pipeline review, see the self-improvement loop in action, optionally connect CRM.
+**Coaching truth**: The danger is real — if you outsource all your thinking to Claude, you will gradually become less capable, not more. The reps who get the most out of AI in 2026 are the ones who use it to think harder, not to think less. The tasks AI handles well (research, drafting, data entry) are table stakes. The tasks that create competitive advantage are becoming *more human*, not less: complex judgment, genuine curiosity, relationship depth, creative problem-solving.
 
-### In-class exercise A: Pipeline review (15 min)
+**What Claude removes**: The 65% of time currently lost to busywork — so you can reinvest it in developing those irreplaceable human skills, not in clearing more items off the task list.
 
-**If CRM is connected**: Run:
+### In-class activity: The AI-Free Debrief (10 min, pairs)
+
+Before the Cowork demo — put devices down. With a partner:
+- Tell them everything you know about your best current deal, from memory
+- What do you know for certain? What are you assuming? What haven't you actually asked?
+- What is the buyer feeling that they haven't said out loud?
+
+The deal that was "prepped by Claude" often has shallow human understanding underneath. That gap is the work.
+
+### In-class exercise A: Full workspace configuration (15 min)
+
+Your workspace folder structure is already set up (this repo). Now add the global instructions:
+
+1. Open `CLAUDE.md` (already exists in the workspace)
+2. Verify your 4 fields are filled in: Company, Product, ICP, CRM
+3. Add or update the **Sales Motion** and **Qualification Framework** fields with your real methodology
+
+Then set **Cowork global instructions** in Claude Desktop → Settings → Cowork:
+```
+You are a sales productivity assistant for [Name] at [Company].
+Our solution: [one sentence]
+Our ICP: [2–3 sentences]
+My territory: [geography/segment/industry]
+My tone: [e.g., "direct, consultative, no jargon"]
+CRM: [system] [connected via MCP: yes/no]
+Always format outputs as files, not chat responses.
+When preparing meeting briefs, follow the Account Research Skill.
+When drafting outreach, follow the Cold Outreach Skill.
+When processing calls, follow the Post-Call Skill.
+```
+
+### In-class exercise B: Pipeline review (10 min)
+
+**If CRM is connected**:
 ```
 /pipeline-review [today's date]
 ```
-Claude queries your live pipeline and generates a full snapshot.
 
-**If CRM is NOT connected** (most of you): Run:
+**If CRM is NOT connected** (most of you in the room):
 ```
 /pipeline-review [today's date]
 ```
-Claude will ask you to provide pipeline data. Copy the table from `Course-Materials/sample-pipeline.md` and paste it when prompted.
+When prompted for pipeline data, paste the table from `Course-Materials/sample-pipeline.md`.
 
-Look at the output. Notice:
-- The at-risk flags (which deals trip them and why?)
-- The "Recommended Focus" section
-- The Knowledge Health pulse at the bottom (which files are stale?)
+Look at the output: which deals trip the at-risk flags and why? What's the coverage ratio? Is there a Knowledge Health pulse at the bottom — any stale files?
 
-### In-class exercise B: Knowledge health check (10 min)
+### In-class exercise C: The Monday Morning Workflow (10 min)
 
-Run:
+Copy the workflow from `Course-Materials/monday-morning-workflow.md` into Claude Cowork as a new task. Replace the placeholder account names with 3 real deals.
+
+Manual equivalent: 90–120 minutes. Cowork: 5–8 minutes while you prepare for your first call.
+
+### In-class exercise D: Knowledge health + retro (optional, 10 min)
+
 ```
 /knowledge-health
 ```
 
-You'll see a dashboard showing which knowledge files are current vs. stale, any competitor gaps (competitors in active deals with no battle card), and any pending retro insights.
-
-After a full day of exercises, your `Product-Overview.md` should be populated but several files will still be empty or at their initial state. The dashboard makes the gaps visible — and tells you exactly what to do next.
-
-### In-class exercise C: Retro on a past deal (10 min, if time permits)
-
-Think of a deal you closed in the last 90 days — won or lost. Run:
+After a full day of exercises, you'll see which knowledge files are current vs. stale, and any pending gaps. Then, if time permits, run a retro on a deal you closed in the last 90 days:
 ```
 /retro [Account Name] [won or lost]
 ```
-
-If CRM isn't connected, Claude will ask for the basics (outcome, deal size, competitor) and then run the retrospective questions. The questions are designed to surface insights you might not capture in a standard deal review.
+If CRM isn't connected, Claude will ask for basics and run the full retrospective questions — no CRM needed.
 
 ### Module 5 deliverable
-- Pipeline review report (from sample or live CRM)
-- Knowledge health dashboard showing your current baseline
-- Optional: CRM connected via `SALESFORCE-SETUP.md` (or equivalent)
+- Fully configured workspace: CLAUDE.md complete, Cowork global instructions set, all three Skills tested
+- Pipeline review output (from sample data or live CRM)
+- Optional: CRM connected via `SALESFORCE-SETUP.md`
 
 ---
 
-## CRM Connection (Optional — Module 5)
+## CRM Connection (Optional — Do After Class)
 
-Follow `SALESFORCE-SETUP.md` for Salesforce, or the HubSpot/Dynamics sections in the same file.
+Follow `SALESFORCE-SETUP.md` for Salesforce, HubSpot, or Dynamics 365.
 
-**If your IT hasn't approved MCP access**: Don't worry. Every skill in this workspace works without CRM — it just asks you to provide the data manually. CRM connection is a force multiplier, not a requirement.
+**If your IT hasn't approved MCP access**: Every skill works without CRM. CRM connection is a force multiplier on a workflow that should already be running. Start with manual input — connect later.
 
-**After class**: Once you're back at your desk with your usual IT environment, the CRM connection typically takes 15-20 minutes. The `SALESFORCE-SETUP.md` guide walks through each step with screenshots.
+**After class**: Once you're at your desk with your usual IT environment, the connection typically takes 15–20 minutes.
 
 ---
 
-## 30-Day Adoption Plan
+## 30-Day Adoption Roadmap
 
-Take this home. One thing per week.
+Take this home. One focus area per week.
 
 **Week 1 — Foundation**
-- Run `/account-research` before every call this week
-- Run `/call-prep` the morning of each call (even without CRM — paste your notes)
-- Goal: build the habit of opening Claude before your CRM
+Run Claude account research before every call. Time yourself against your pre-course baseline.
+Goal: Build the habit of opening Claude before your CRM.
 
 **Week 2 — Outreach**
-- Deploy your 3-email sequence from Module 3 on 10 new prospects
-- Measure open and reply rate vs. your pre-course baseline
-- Refine the `email-drafter` SKILL.md based on what responses tell you
+Deploy your 3-email sequence from Module 3 on 20 new prospects.
+Measure open and reply rates against your pre-course baseline.
+Refine the `email-drafter` SKILL.md based on what responses tell you.
 
-**Week 3 — Post-Call**
-- Run `/post-call` after every discovery call this week
-- Compare the follow-up emails Claude drafts to what you'd have written yourself
-- Connect CRM if you haven't yet
+**Week 3 — Cowork**
+Run `/post-call debrief` after every discovery call this week.
+Compare your self-scores to Claude's scores. Where is the gap narrowing?
+Connect CRM if you haven't yet.
 
-**Week 4 — Pipeline Review**
-- Run `/pipeline-review` before your weekly manager 1:1
-- Run `/retro` on 2 recently closed deals (one win, one loss)
-- Run `/knowledge-health` — see how much the workspace has improved in 4 weeks
+**Week 4 — Optimization**
+Use the SPEAR framework on your remaining time sinks — build Skills for anything scoring 3+.
+Run `/knowledge-health` — see how much the workspace has improved.
+Share your best-performing Skill with one teammate.
 
 ---
 
-## Getting Help
+## Troubleshooting
 
-- **Can't find a skill**: Make sure you opened the folder (not a file) in Claude Desktop. All skills live in `.claude/skills/`.
-- **Skill output is too generic**: Your `CLAUDE.md` needs more context — especially `Product:` and `ICP:`. Fill those in and re-run.
-- **CRM errors**: Check `SALESFORCE-SETUP.md` troubleshooting section.
-- **Something isn't working as described**: Run `/knowledge-health` — it often surfaces why a skill is underperforming (missing knowledge files).
+| Issue | Fix |
+|-------|-----|
+| Can't find a skill | Make sure you opened the *folder* (not a file) in Claude Desktop. Skills live in `.claude/skills/`. |
+| Output is too generic | Your `CLAUDE.md` needs more context — especially `Product:` and `ICP:`. Fill those in and re-run. |
+| CRM errors | Check `SALESFORCE-SETUP.md` troubleshooting section. |
+| Skill underperforming | Run `/knowledge-health` — it often surfaces why (missing or stale knowledge files). |
+| Prompt gives vague output | Apply the CRISP framework (`Course-Materials/crisp-framework.md`) — the issue is almost always missing Specifics or Format. |

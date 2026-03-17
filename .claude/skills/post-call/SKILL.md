@@ -1,15 +1,55 @@
 ---
 name: post-call
-description: Process a call transcript or rough notes into a structured call summary, CRM update suggestions, follow-up email draft, and one coaching note. No CRM required — works from pasted notes or a transcript file dropped into the account folder.
+description: Process a call transcript or rough notes into a structured call summary, CRM update suggestions, follow-up email draft, and one coaching note. Supports a 'debrief' mode that scores the call against the Self-Coaching Scorecard for the 360° Call Debrief exercise. No CRM required.
 compatibility: claude-code
 metadata:
   category: pipeline-velocity
-  invocation: /post-call [Account Name]
+  invocation: /post-call [Account Name] | /post-call [Account Name] debrief
 ---
 
 # Post-Call Skill
 
-Convert raw call notes or a transcript into everything you need to advance the deal — in under 2 minutes. Usage: `/post-call [Account Name]`
+Convert raw call notes or a transcript into everything you need to advance the deal — in under 2 minutes.
+
+**Standard mode**: `/post-call [Account Name]`
+**Debrief mode** (360° scorecard analysis): `/post-call [Account Name] debrief`
+
+---
+
+## Debrief Mode
+
+When invoked with the `debrief` keyword, run the Self-Coaching Scorecard analysis **before** the standard outputs. Read `Course-Materials/self-coaching-scorecard.md` for the full scoring rubric.
+
+Score each of the 7 dimensions (1–5) with specific evidence from the transcript:
+
+```
+## 360° Call Debrief — [Account Name] — [Date]
+
+| Dimension | Score | Evidence from call |
+|-----------|-------|--------------------|
+| Up-front contract | /5 | [what was or wasn't said] |
+| Insight-led opener | /5 | [opening line or approach] |
+| Question quality | /5 | [strongest and weakest question] |
+| Business impact uncovered | /5 | [what was or wasn't quantified] |
+| Stakeholder mapping | /5 | [what's known/unknown about the committee] |
+| Next step close | /5 | [how the call ended] |
+| Talk-to-listen ratio | /5 | [estimated % — note: rough estimate from transcript] |
+
+**Total**: [sum]/35
+
+**3 moments where a question would have been stronger than a statement**:
+1. [Timestamp or context + the statement made + suggested question instead]
+2. [...]
+3. [...]
+
+**Next step assessment**: [Was it committed or vague? Specific date + agenda confirmed?]
+
+**One coaching note**: [The single most important thing to improve in the next call]
+```
+
+Then continue with the standard outputs below (Steps 3–8).
+
+---
 
 ## Instructions
 

@@ -1,17 +1,42 @@
-# In-Class Setup — 15 Minutes
+# In-Class Setup — 20 Minutes
 
-By the end of this setup you'll have a working AI sales workspace, your product knowledge loaded, and your first account brief ready. No CRM connection needed.
+By the end of this setup you'll have two things running: a **Claude Project** with your sales context loaded (for Modules 1–3), and the **Cowork workspace** set up (for Modules 4–5). No CRM connection needed for either.
 
 ---
 
 ## Prerequisites (do before class)
 
 - [ ] **Claude Desktop** installed (download at claude.ai/download — Mac or Windows)
-- [ ] **Claude Pro or Team plan** active ($20/month minimum — required for skills and Cowork mode)
+- [ ] **Claude Pro or Team plan** active ($20/month minimum — required for Projects, Skills, and Cowork)
 
 If you haven't done these yet, do them now — it takes about 5 minutes.
 
 ---
+
+## Part A: Claude Projects Setup (5 min) — for Modules 1–3
+
+Claude Projects gives Claude persistent memory of your sales context — your ICP, your product, your territory. Every chat in the Project automatically knows who you are and what you sell.
+
+1. Open **Claude Desktop** → click **Projects** in the left sidebar → **New Project**
+2. Name it: `My Territory — [Your Name]`
+3. Click **Add to Project** and upload:
+   - Your ICP definition (a paragraph or bullet list works — it doesn't need to be formatted)
+   - Your product one-pager or key value props (PDF or text)
+   - 3 high-performing emails from yourself or top teammates (paste as text if needed)
+4. In **Project Instructions**, add:
+   ```
+   My name: [Your Name]
+   My role: [Your Title] at [Company]
+   Tone: [e.g., "direct and consultative, no jargon"]
+   CRM: [System — leave blank if not connected yet]
+   ```
+5. **Test**: In the Project chat, type: "Create a one-page account brief for [any real prospect]"
+
+You should get a specific brief that knows your product. If it's generic, add more context to the Project.
+
+---
+
+## Part B: Cowork Workspace Setup (15 min) — for Modules 4–5
 
 ## Step 1: Download the workspace (5 min)
 
@@ -27,10 +52,10 @@ git clone https://github.com/aupsy/ClaudeWorkspaceForB2BSellers-Course
 
 ---
 
-## Step 2: Open in Claude Desktop (1 min)
+## Step 2: Open in Claude Cowork (1 min)
 
-1. Open **Claude Desktop**
-2. **File → Open Folder** (or drag the folder onto the Claude Desktop window)
+1. In **Claude Desktop**, switch to **Cowork** mode (top of the chat panel)
+2. **File → Open Folder** (or drag the folder onto the window)
 3. Select the folder you just downloaded/unzipped
 
 You should see a file tree on the left panel. If you don't see it, go to **View → Show Files**.
@@ -68,15 +93,17 @@ Claude visits your product website and auto-fills `Knowledge/product/Product-Ove
 
 ---
 
-## Test: Your first account brief (1 min)
+## Test: Your first Cowork account brief (1 min)
 
-Type:
+In the Cowork chat panel, type:
 
 ```
 /account-research [any real prospect you're currently pursuing]
 ```
 
-If you see a formatted brief with company context, exec names, and suggested talk track — **you're live.** That's it.
+If you see a formatted brief with company context, exec names, and suggested talk track — **the workspace is live.**
+
+> **Tip**: This Cowork brief pulls from your `Knowledge/product/` files. The Projects brief (from Part A) pulls from your Project uploads. They complement each other — the Projects path is faster for one-off chat tasks; the Cowork path generates files you can save and reuse.
 
 ---
 
