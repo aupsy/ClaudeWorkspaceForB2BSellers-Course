@@ -4,6 +4,21 @@ This file loads automatically every session. It defines who we are, what success
 
 ---
 
+> ## In-Class Quick Start
+> Fill in these 4 fields now (everything else can wait until after class):
+> ```
+> Company:  [your company name]
+> Product:  [what you sell — one sentence]
+> ICP:      [your ideal customer — company size, industry, buyer role]
+> CRM:      [leave blank — connect after class if your IT allows]
+> ```
+> Then run: `/hydrate website [your product homepage URL]`
+> Test with: `/account-research [any real prospect]`
+
+---
+
+---
+
 ## Company & Product Context
 
 - **Company**: [FILL IN — e.g., Acme Corp]

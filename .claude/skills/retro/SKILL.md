@@ -23,9 +23,11 @@ The outcome (won/lost) can be provided upfront or discovered from CRM data.
 
 ---
 
-## Step 1: Query CRM for the Closed Opportunity
+## Step 1: Get Deal Context
 
-Fetch the most recently closed opportunity for the account:
+Check whether a CRM MCP server is configured.
+
+**If CRM IS connected** → fetch the closed opportunity:
 
 ```soql
 SELECT Id, Name, StageName, Amount, CloseDate, Probability,
@@ -41,9 +43,22 @@ ORDER BY CloseDate DESC
 LIMIT 1
 ```
 
-Determine won/lost from `StageName` (e.g., "Closed Won" vs. "Closed Lost") if not provided at invocation.
+Determine won/lost from `StageName` if not provided at invocation. If no closed opportunity found, ask the rep to confirm the account name.
 
-If no closed opportunity is found: ask the rep to confirm the account name or paste the opportunity ID directly.
+**If CRM is NOT connected** (e.g., during training or before MCP is set up) → skip the query and ask:
+
+```
+Let's run a quick retro on [Account Name]. A few basics to get started:
+
+1. Outcome — did we win or lose this one?
+2. Deal size (roughly)?
+3. When did it close?
+4. Was there a competitor in play? If so, who?
+
+That's all I need — the retrospective questions will cover everything else.
+```
+
+Once the rep answers, proceed directly to **Step 4** (structured retrospective questions). Steps 2-3 (local account notes + battle card) can still run if the account folder exists locally.
 
 ---
 

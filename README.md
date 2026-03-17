@@ -1,3 +1,10 @@
+# B2B Sales Claude Workspace — Course Edition
+
+> **Course participants**: Start here → **[COURSE-SETUP.md](COURSE-SETUP.md)** (15 min, no CRM needed)
+> Then follow the module guide → **[COURSE.md](COURSE.md)**
+
+---
+
 # B2B Sales Claude Workspace
 
 A Claude Code workspace template for B2B sales teams. This repo is your AI-native knowledge base — it gives Claude the context it needs to help you prep for calls, analyze your pipeline, score deals, research accounts, and draft follow-ups.

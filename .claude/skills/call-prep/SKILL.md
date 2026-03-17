@@ -9,6 +9,26 @@ Generate a pre-call briefing for an account. Usage: `/call-prep [Account Name]`
 
 ## Instructions
 
+### Step 0: Check for CRM Connection
+
+Before querying CRM, check whether an MCP server is configured for it.
+
+**If CRM IS connected** → proceed to Step 1 (live data query).
+
+**If CRM is NOT connected** (e.g., during training or if MCP isn't set up yet):
+- Skip Steps 1 and 2
+- Jump directly to Step 3 (local notes) and supplement with public web research
+- Use web search to find: the company's recent news, executive names and titles, any recent funding, press releases, or relevant industry context
+- Ask the rep: *"Any context from your last interaction I should know about? You can paste CRM notes, email excerpts, or just give me a quick verbal on where things stand."*
+- Flag clearly at the top of the briefing:
+
+```
+> ⚠️ CRM not connected — this briefing is based on public research + any notes you provided.
+> Live opportunity data, contact history, and logged activities are not included.
+```
+
+The briefing is still useful — public research plus whatever the rep shares will cover most of what matters before a call.
+
 ### Step 1: Query Your CRM (Primary Source)
 
 Use the CRM MCP server to fetch live data. Run these queries in order:
