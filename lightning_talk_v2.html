@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="slides-format" content="viewport">
+    <title>Sell Smarter with Claude Cowork — Lightning Talk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@12/dist/motion.js"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #0c1220;
+            --color-bg-deep: #060c17;
+            --color-surface: #162035;
+            --color-text: #f0f4ff;
+            --color-text-secondary: #b8c8e8;
+            --color-text-muted: #6b8099;
+            --color-accent-1: #76b900;
+            --color-accent-2: #a8e063;
+            --color-accent-3: #00d4aa;
+            --color-glass-bg: rgba(255,255,255,0.05);
+            --color-glass-border: rgba(118,185,0,0.15);
+            --color-vignette: rgba(0,0,0,0.5);
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+    </style>
+    <style>
+        :root { --color-bg: #0c1220; --color-text: #f0f4ff; --glow-color-rgb: 118,185,0; }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { background: var(--color-bg); margin: 0; }
+        body { font-family: var(--font-body); color: var(--color-text); overflow: hidden; height: 100vh; width: 100vw; }
+        .deck { width: 100vw; height: 100vh; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(0.95); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; overflow: hidden; }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
+        .slide > .content { position: relative; z-index: 2; width: 100%; max-width: 1100px; padding: clamp(1.5rem, 4vw, 3.5rem); }
+        .nav-controls { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; z-index: 100; background: rgba(12,18,32,0.85); backdrop-filter: blur(12px); padding: 10px 24px; border-radius: 40px; border: 1px solid rgba(118,185,0,0.2); }
+        .nav-btn { width: 38px; height: 38px; border: none; background: rgba(118,185,0,0.1); color: #76b900; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .nav-btn:hover { background: rgba(118,185,0,0.2); }
+        .slide-dots { display: flex; gap: 7px; }
+        .slide-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(118,185,0,0.2); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+        .slide-dots .dot.active { background: #76b900; transform: scale(1.35); }
+        .slide-counter { font-size: 0.75rem; color: var(--color-text-muted); min-width: 40px; text-align: center; }
+        .reveal { opacity: 0; transform: translateY(20px); }
+        @keyframes float-slow { 0%{transform:translate(0,0) scale(1)} 25%{transform:translate(60px,-50px) scale(1.12)} 50%{transform:translate(-40px,40px) scale(0.9)} 75%{transform:translate(50px,20px) scale(1.08)} 100%{transform:translate(0,0) scale(1)} }
+        @keyframes float-drift { 0%{transform:translate(0,0) scale(1) rotate(0deg)} 33%{transform:translate(-50px,-60px) scale(1.15) rotate(3deg)} 66%{transform:translate(40px,30px) scale(0.88) rotate(-2deg)} 100%{transform:translate(0,0) scale(1) rotate(0deg)} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+        .gradient-mesh { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); animation: float-slow 11s ease-in-out infinite; }
+        .blob:nth-child(2) { animation: float-drift 15s ease-in-out infinite; }
+        .blob:nth-child(3) { animation: float-slow 19s ease-in-out infinite reverse; }
+        .slide::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 256px 256px; opacity: 0.025; mix-blend-mode: overlay; }
+        .slide::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 50%, var(--color-vignette) 100%); }
+        .text-glow { text-shadow: 0 0 20px rgba(118,185,0,0.5), 0 0 40px rgba(118,185,0,0.2); }
+        .stat-glow { text-shadow: 0 0 30px rgba(118,185,0,0.6), 0 0 60px rgba(118,185,0,0.25); }
+        @keyframes glow-pulse { 0%,100%{text-shadow:0 0 20px rgba(118,185,0,0.5),0 0 40px rgba(118,185,0,0.2)} 50%{text-shadow:0 0 30px rgba(118,185,0,0.8),0 0 60px rgba(118,185,0,0.3)} }
+        .glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+        .bar-fill { height: 100%; border-radius: 4px; width: 0; background: linear-gradient(90deg, #76b900, #a8e063); }
+        .bar-track { background: rgba(255,255,255,0.06); border-radius: 4px; height: 10px; overflow: hidden; }
+
+        /* Lesson number badge */
+        .lesson-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(118,185,0,0.12); border: 1px solid rgba(118,185,0,0.25); border-radius: 100px; padding: 4px 14px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #a8e063; margin-bottom: 1rem; }
+
+        /* Old/New workflow cards */
+        .workflow-card { border-radius: 14px; padding: 1.1rem 1.3rem; }
+        .workflow-old { background: rgba(255,60,60,0.07); border: 1px solid rgba(255,80,80,0.18); }
+        .workflow-new { background: rgba(118,185,0,0.08); border: 1px solid rgba(118,185,0,0.22); }
+        .workflow-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem; }
+        .workflow-label.old { color: #ff6b6b; }
+        .workflow-label.new { color: #a8e063; }
+
+        /* Code/prompt block */
+        .prompt-block { background: rgba(0,0,0,0.35); border: 1px solid rgba(118,185,0,0.2); border-radius: 10px; padding: 0.9rem 1.1rem; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 0.78rem; line-height: 1.6; color: #c8f0a0; }
+        .prompt-label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: #76b900; margin-bottom: 0.4rem; font-family: var(--font-body); }
+
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+    </style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+
+<div class="deck">
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+════════════════════════════════════════════════ -->
+<div class="slide slide-1 active" data-slide="1">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#76b900;opacity:0.13;"></div>
+        <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#00d4aa;opacity:0.1;"></div>
+        <div class="blob" style="width:220px;height:220px;top:45%;left:18%;background:#a8e063;opacity:0.08;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div style="font-size:96px;margin-bottom:1.2rem;animation:float 3.5s ease-in-out infinite;" class="reveal">⚡</div>
+        <h1 class="font-display text-[clamp(2.6rem,5.5vw,4.4rem)] font-black tracking-tight mb-4 reveal" style="background:linear-gradient(135deg,#76b900,#a8e063,#00d4aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sell Smarter with<br>Claude Cowork</h1>
+        <p class="text-[clamp(0.85rem,1.4vw,1.2rem)] font-light text-text-muted tracking-[5px] uppercase mb-6 reveal">5 Lessons · 30 Minutes · Immediate Impact</p>
+        <p class="text-text-secondary text-sm reveal" style="max-width:480px;margin:0 auto;line-height:1.7;">What top sellers already know — and how AI helps you<br>do it in a fraction of the time</p>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 2 — THE PROBLEM
+════════════════════════════════════════════════ -->
+<div class="slide slide-2" data-slide="2">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-60px;background:#76b900;opacity:0.07;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-40px;background:#00d4aa;opacity:0.06;"></div>
+    </div>
+    <div class="deco-shape" data-speed="0.03" style="position:absolute;width:200px;height:200px;top:10%;left:5%;border-radius:50%;border:1px solid rgba(118,185,0,0.06);"></div>
+    <div class="content">
+        <p class="lesson-badge reveal">The Problem</p>
+        <h2 class="font-display text-[clamp(1.9rem,4vw,2.8rem)] font-bold mb-6 reveal">Sellers are buried in work<br><em>around</em> selling</h2>
+        <div class="grid grid-cols-3 gap-4 mb-6 reveal">
+            <div class="workflow-card workflow-old text-center">
+                <div style="font-size:2rem;margin-bottom:0.4rem;">🔍</div>
+                <div class="text-[1.6rem] font-black glow-pulse" style="color:#ff6b6b;">65%</div>
+                <div class="text-xs text-text-muted mt-1">of a rep's week is<br>NOT selling</div>
+            </div>
+            <div class="workflow-card workflow-old text-center">
+                <div style="font-size:2rem;margin-bottom:0.4rem;">✍️</div>
+                <div class="text-[1.6rem] font-black" style="color:#ff6b6b;">4.2 hrs</div>
+                <div class="text-xs text-text-muted mt-1">per week on<br>CRM & admin</div>
+            </div>
+            <div class="workflow-card workflow-old text-center">
+                <div style="font-size:2rem;margin-bottom:0.4rem;">📧</div>
+                <div class="text-[1.6rem] font-black" style="color:#ff6b6b;">3%</div>
+                <div class="text-xs text-text-muted mt-1">avg cold email<br>reply rate</div>
+            </div>
+        </div>
+        <div class="reveal" style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 1.4rem;">
+            <p class="text-text-secondary text-sm leading-relaxed">The best sellers already know what to do — research deeply, personalize everything, update the CRM, prep the team, plan the week. <strong class="text-accent-2">Claude Cowork gives you the time to actually do it.</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 3 — HOW THIS TALK WORKS
+════════════════════════════════════════════════ -->
+<div class="slide slide-3" data-slide="3">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:350px;height:350px;top:-70px;right:-50px;background:#76b900;opacity:0.08;"></div>
+        <div class="blob" style="width:240px;height:240px;bottom:-50px;left:-30px;background:#00d4aa;opacity:0.06;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <p class="lesson-badge reveal" style="display:inline-flex;">How This Works</p>
+        <h2 class="font-display text-[clamp(1.8rem,3.8vw,2.6rem)] font-bold mb-8 reveal">5 lessons. Each one follows the same pattern.</h2>
+        <div class="grid grid-cols-3 gap-5 reveal">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.4rem;text-align:center;">
+                <div style="font-size:2.2rem;margin-bottom:0.6rem;">💡</div>
+                <div class="text-accent-2 font-bold text-sm mb-2">The Lesson</div>
+                <div class="text-text-secondary text-xs leading-relaxed">A principle top sellers already believe in</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.4rem;text-align:center;">
+                <div style="font-size:2.2rem;margin-bottom:0.6rem;">🔄</div>
+                <div class="text-accent-2 font-bold text-sm mb-2">Old Way vs New Way</div>
+                <div class="text-text-secondary text-xs leading-relaxed">Same outcome — 10x less time with Claude</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.4rem;text-align:center;">
+                <div style="font-size:2.2rem;margin-bottom:0.6rem;">🎬</div>
+                <div class="text-accent-2 font-bold text-sm mb-2">Live Demo</div>
+                <div class="text-text-secondary text-xs leading-relaxed">You watch it happen — real prompt, real output</div>
+            </div>
+        </div>
+        <p class="text-text-muted text-xs mt-7 reveal tracking-wide uppercase">By the end, you'll have 5 workflows to try this afternoon</p>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 4 — LESSON 1: ACCOUNT RESEARCH
+════════════════════════════════════════════════ -->
+<div class="slide slide-4" data-slide="4">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:360px;height:360px;top:-70px;right:-60px;background:#76b900;opacity:0.08;"></div>
+        <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#a8e063;opacity:0.06;"></div>
+    </div>
+    <div class="deco-shape" data-speed="0.02" style="position:absolute;bottom:15%;right:8%;width:160px;height:160px;border-radius:50%;border:1px solid rgba(118,185,0,0.07);"></div>
+    <div class="content">
+        <p class="lesson-badge reveal">Lesson 1 · Account Research</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] font-bold mb-5 reveal">Know your buyer better than their own team does</h2>
+        <div class="grid grid-cols-2 gap-4 mb-5">
+            <div class="workflow-card workflow-old reveal">
+                <div class="workflow-label old">Old Way — 45 min</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Google news, LinkedIn, 10-K</li>
+                    <li>• Skim 6 tabs, copy-paste notes</li>
+                    <li>• Manually build call prep doc</li>
+                    <li>• Miss the competitor mention buried in a March press release</li>
+                </ul>
+            </div>
+            <div class="workflow-card workflow-new reveal">
+                <div class="workflow-label new">New Way — 90 seconds</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Drop account brief into Cowork</li>
+                    <li>• "Prep me for my Ford call tomorrow"</li>
+                    <li>• Get: 5 discovery questions, 3 news hooks, competitive risks, opening line</li>
+                    <li>• Ready before your coffee cools</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="prompt-label">Demo Prompt</div>
+            <div class="prompt-block">"I have a discovery call with James Okafor at Ford tomorrow. He's the Director of AI &amp; Advanced Computing. They're trying to cut AV model training from 18 hours to 4. Write me a 3-minute call opener and my top 5 discovery questions."</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 5 — LESSON 2: INSIGHT-LED EMAIL
+════════════════════════════════════════════════ -->
+<div class="slide slide-5" data-slide="5">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#00d4aa;opacity:0.08;"></div>
+        <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#76b900;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="lesson-badge reveal">Lesson 2 · Outreach</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] font-bold mb-5 reveal">Lead with insight. Features come second.</h2>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="workflow-card workflow-old reveal">
+                <div class="workflow-label old">Typical Cold Email</div>
+                <p class="text-xs text-text-secondary leading-relaxed italic">"Hi Priya, I'm Alex from NVIDIA. We help financial institutions accelerate AI with our H200 GPU platform. Our customers see 3x faster training times. Would you have 15 minutes next week?"</p>
+                <div class="mt-2 text-xs" style="color:#ff6b6b;">↳ Reply rate: ~2–3%</div>
+            </div>
+            <div class="workflow-card workflow-new reveal">
+                <div class="workflow-label new">Insight-Led (Claude-Assisted)</div>
+                <p class="text-xs text-text-secondary leading-relaxed italic">"Hi Priya — saw JPMC's announcement to scale real-time AML monitoring 10x by Q3. Banks at that inflection usually hit a memory-wall on their training clusters before they hit a budget wall. Happy to share how two other Tier-1 banks solved it."</p>
+                <div class="mt-2 text-xs" style="color:#a8e063;">↳ Reply rate: 18–22%</div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="prompt-label">Demo Prompt</div>
+            <div class="prompt-block">"Write a cold email to Priya Nair at JPMorgan using the March 10 AML announcement as the hook. Lead with insight about scaling compute, not with our product. Keep it under 120 words. Give me 3 subject line options too."</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 6 — LESSON 3: COACHING + CRM
+════════════════════════════════════════════════ -->
+<div class="slide slide-6" data-slide="6">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:360px;height:360px;top:-70px;right:-60px;background:#76b900;opacity:0.08;"></div>
+        <div class="blob" style="width:230px;height:230px;bottom:-50px;left:-30px;background:#00d4aa;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content">
+        <p class="lesson-badge reveal">Lesson 3 · Coaching + CRM</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] font-bold mb-5 reveal">Your call notes → clean CRM + coaching in 60 seconds</h2>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="workflow-card workflow-old reveal">
+                <div class="workflow-label old">Old Way — 25 min post-call</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Manually reconstruct what was said</li>
+                    <li>• Guess at MEDDIC gaps you forgot to probe</li>
+                    <li>• Write a "call went well" Salesforce note</li>
+                    <li>• No coaching — you move to the next call</li>
+                </ul>
+            </div>
+            <div class="workflow-card workflow-new reveal">
+                <div class="workflow-label new">New Way — 60 seconds</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Paste raw voice-to-text notes into Cowork</li>
+                    <li>• Get structured MEDDIC update, Salesforce summary, follow-up email</li>
+                    <li>• <em>Plus:</em> 3 coaching observations — what you did well and what to improve</li>
+                    <li>• Managers get quality updates without nagging</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="prompt-label">Demo Prompt</div>
+            <div class="prompt-block">"Here are my raw notes from the Ford call. Write: 1) a Salesforce opportunity note, 2) an updated MEDDIC scorecard, 3) three coaching observations for me, and 4) my follow-up email to James with next steps."</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 7 — LESSON 4: PROPOSALS
+════════════════════════════════════════════════ -->
+<div class="slide slide-7" data-slide="7">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:350px;height:350px;top:-65px;right:-55px;background:#76b900;opacity:0.08;"></div>
+        <div class="blob" style="width:220px;height:220px;bottom:-45px;left:-30px;background:#a8e063;opacity:0.06;"></div>
+    </div>
+    <div class="deco-shape" data-speed="0.04" style="position:absolute;top:12%;left:4%;width:140px;height:140px;border-radius:50%;border:1px solid rgba(118,185,0,0.07);"></div>
+    <div class="content">
+        <p class="lesson-badge reveal">Lesson 4 · Proposals</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] font-bold mb-5 reveal">Write for the executive who has 90 seconds to decide</h2>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="workflow-card workflow-old reveal">
+                <div class="workflow-label old">Old Way — 3 to 5 hours</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Pull last quarter's proposal template</li>
+                    <li>• Swap company names, forget to change a few</li>
+                    <li>• Spec-heavy, outcome-light</li>
+                    <li>• Economic buyer skips to price and says no</li>
+                </ul>
+            </div>
+            <div class="workflow-card workflow-new reveal">
+                <div class="workflow-label new">New Way — 20 minutes</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Feed deal context into Cowork</li>
+                    <li>• Get a 1-page exec summary written for Sarah Chen, VP-level, outcome-first</li>
+                    <li>• ROI framed in their language: "$1.2B Azure AI revenue enabled"</li>
+                    <li>• Handle objections before they come up</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="prompt-label">Demo Prompt</div>
+            <div class="prompt-block">"Write a 1-page executive summary for Sarah Chen, VP at Microsoft Azure. She's non-technical. Focus on the $1.2B Azure AI revenue unlock and the 34% cost reduction. Address the multi-vendor / lock-in concern proactively."</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 8 — LESSON 5: WEEKLY PLANNING
+════════════════════════════════════════════════ -->
+<div class="slide slide-8" data-slide="8">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:360px;height:360px;top:-70px;right:-60px;background:#00d4aa;opacity:0.08;"></div>
+        <div class="blob" style="width:230px;height:230px;bottom:-50px;left:-30px;background:#76b900;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="lesson-badge reveal">Lesson 5 · Pipeline &amp; Planning</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] font-bold mb-5 reveal">Monday morning clarity — before your first coffee</h2>
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="workflow-card workflow-old reveal">
+                <div class="workflow-label old">Old Way — Sunday night dread</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Stare at Salesforce, don't know where to start</li>
+                    <li>• Prioritize loudest deal, not most important</li>
+                    <li>• Miss that one deal going dark</li>
+                    <li>• Manager 1:1 is reactive, not strategic</li>
+                </ul>
+            </div>
+            <div class="workflow-card workflow-new reveal">
+                <div class="workflow-label new">New Way — 8 minutes Sunday</div>
+                <ul class="text-xs text-text-secondary leading-relaxed space-y-1">
+                    <li>• Paste pipeline snapshot into Cowork</li>
+                    <li>• Get priority ranking with reasoning</li>
+                    <li>• Spot JPMorgan going dark (16 days silent)</li>
+                    <li>• GTC strategy, Boeing close plan, manager update — all drafted</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="prompt-label">Demo Prompt</div>
+            <div class="prompt-block">"Here's my pipeline for the week. Rank my deals by urgency, flag anything at risk, and draft a 5-bullet update for my Friday 1:1 with my manager. Also — how should I use GTC to advance my Ford and Boeing deals?"</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 9 — THE COMPOUND EFFECT
+════════════════════════════════════════════════ -->
+<div class="slide slide-9" data-slide="9">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:440px;height:440px;top:-100px;right:-80px;background:#76b900;opacity:0.11;"></div>
+        <div class="blob" style="width:280px;height:280px;bottom:-60px;left:-50px;background:#00d4aa;opacity:0.09;"></div>
+        <div class="blob" style="width:180px;height:180px;top:40%;left:10%;background:#a8e063;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <p class="lesson-badge reveal" style="display:inline-flex;">The Compound Effect</p>
+        <h2 class="font-display text-[clamp(1.8rem,3.8vw,2.6rem)] font-bold mb-8 reveal">Apply all 5 lessons — every week</h2>
+        <div class="grid grid-cols-5 gap-3 mb-7 reveal">
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 0.7rem;text-align:center;">
+                <div class="text-[1.4rem] font-black text-accent-2 glow-pulse">−45 min</div>
+                <div class="text-xs text-text-muted mt-1">Research per<br>account</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 0.7rem;text-align:center;">
+                <div class="text-[1.4rem] font-black text-accent-2 glow-pulse">+18%</div>
+                <div class="text-xs text-text-muted mt-1">Email reply<br>rate</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 0.7rem;text-align:center;">
+                <div class="text-[1.4rem] font-black text-accent-2 glow-pulse">−25 min</div>
+                <div class="text-xs text-text-muted mt-1">CRM + coaching<br>per call</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 0.7rem;text-align:center;">
+                <div class="text-[1.4rem] font-black text-accent-2 glow-pulse">−3 hrs</div>
+                <div class="text-xs text-text-muted mt-1">Proposal<br>writing</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.2);border-radius:12px;padding:1rem 0.7rem;text-align:center;">
+                <div class="text-[1.4rem] font-black text-accent-2 glow-pulse">+2 hrs</div>
+                <div class="text-xs text-text-muted mt-1">Selling time<br>per week</div>
+            </div>
+        </div>
+        <div class="reveal" style="background:rgba(118,185,0,0.1);border:1px solid rgba(118,185,0,0.25);border-radius:14px;padding:1.1rem 1.6rem;display:inline-block;">
+            <span class="text-accent-2 font-bold">8+ hours recovered per week</span>
+            <span class="text-text-secondary text-sm"> — that's one full selling day back, every week</span>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 10 — QUICK START
+════════════════════════════════════════════════ -->
+<div class="slide slide-10" data-slide="10">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:350px;height:350px;top:-65px;right:-55px;background:#76b900;opacity:0.08;"></div>
+        <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#a8e063;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <p class="lesson-badge reveal">Try It Today</p>
+        <h2 class="font-display text-[clamp(1.8rem,3.8vw,2.6rem)] font-bold mb-7 reveal">Set up Claude Cowork in 15 minutes</h2>
+        <div style="display:flex;flex-direction:column;gap:0.9rem;max-width:680px;">
+            <div class="reveal" style="display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1rem 1.2rem;">
+                <div style="background:linear-gradient(135deg,#76b900,#a8e063);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#0c1220;font-weight:800;font-size:0.8rem;flex-shrink:0;">1</div>
+                <div><div class="text-sm font-semibold text-text mb-0.5">Create a Project in Claude.ai</div><div class="text-xs text-text-secondary">Projects = persistent memory + files. One project per major account or use case.</div></div>
+            </div>
+            <div class="reveal" style="display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1rem 1.2rem;">
+                <div style="background:linear-gradient(135deg,#76b900,#a8e063);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#0c1220;font-weight:800;font-size:0.8rem;flex-shrink:0;">2</div>
+                <div><div class="text-sm font-semibold text-text mb-0.5">Upload your account brief or pipeline snapshot</div><div class="text-xs text-text-secondary">Even a rough doc or copied notes works. Claude reads and remembers everything in the project.</div></div>
+            </div>
+            <div class="reveal" style="display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1rem 1.2rem;">
+                <div style="background:linear-gradient(135deg,#76b900,#a8e063);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#0c1220;font-weight:800;font-size:0.8rem;flex-shrink:0;">3</div>
+                <div><div class="text-sm font-semibold text-text mb-0.5">Ask it to do something specific</div><div class="text-xs text-text-secondary">Not "help me with sales." Try: "Prep me for my Ford call" or "Write my post-call CRM note."</div></div>
+            </div>
+            <div class="reveal" style="display:flex;align-items:flex-start;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1rem 1.2rem;">
+                <div style="background:linear-gradient(135deg,#76b900,#a8e063);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#0c1220;font-weight:800;font-size:0.8rem;flex-shrink:0;">4</div>
+                <div><div class="text-sm font-semibold text-text mb-0.5">Pick ONE lesson from today to apply this week</div><div class="text-xs text-text-secondary">Don't change everything. One workflow, this week. You'll feel the difference immediately.</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SLIDE 11 — FULL COURSE CTA
+════════════════════════════════════════════════ -->
+<div class="slide slide-11" data-slide="11">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:500px;height:500px;top:-110px;right:-90px;background:#76b900;opacity:0.12;"></div>
+        <div class="blob" style="width:300px;height:300px;bottom:-70px;left:-50px;background:#00d4aa;opacity:0.09;"></div>
+        <div class="blob" style="width:180px;height:180px;top:35%;left:12%;background:#a8e063;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div style="font-size:72px;margin-bottom:1rem;animation:float 3.5s ease-in-out infinite;" class="reveal">🚀</div>
+        <h2 class="font-display text-[clamp(1.9rem,4vw,3rem)] font-bold mb-4 reveal" style="background:linear-gradient(135deg,#76b900,#a8e063);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Go deeper in the full workshop</h2>
+        <p class="text-text-secondary text-sm mb-8 reveal" style="max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">5-hour hands-on course. Build real Cowork projects for your top accounts. Leave with a system, not just ideas.</p>
+        <div class="grid grid-cols-3 gap-4 reveal" style="max-width:700px;margin:0 auto;">
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.18);border-radius:12px;padding:1rem;text-align:center;">
+                <div class="text-accent-2 font-bold text-sm">Module 1</div>
+                <div class="text-xs text-text-muted mt-1">Account Research<br>Mastery</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.18);border-radius:12px;padding:1rem;text-align:center;">
+                <div class="text-accent-2 font-bold text-sm">Module 2</div>
+                <div class="text-xs text-text-muted mt-1">Outreach that<br>Gets Replies</div>
+            </div>
+            <div style="background:rgba(118,185,0,0.08);border:1px solid rgba(118,185,0,0.18);border-radius:12px;padding:1rem;text-align:center;">
+                <div class="text-accent-2 font-bold text-sm">Module 3</div>
+                <div class="text-xs text-text-muted mt-1">Coaching + CRM<br>Without the Pain</div>
+            </div>
+        </div>
+        <p class="text-text-muted text-xs mt-7 tracking-widest uppercase reveal">Register at [your course link] · Next cohort: April 2026</p>
+    </div>
+</div>
+
+</div><!-- end .deck -->
+
+<div class="nav-controls">
+    <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+    <span class="slide-counter" id="counter">1 / 11</span>
+</div>
+
+<script>
+    let current = 1;
+    const total = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    for (let i = 1; i <= total; i++) { const dot = document.createElement('div'); dot.className = 'dot' + (i===1?' active':''); dot.onclick = ()=>goToSlide(i); dotsContainer.appendChild(dot); }
+    function goToSlide(n) {
+        const prev = document.querySelector('.slide.active');
+        const next = document.querySelector(`.slide[data-slide="${n}"]`);
+        if(prev) prev.classList.remove('active');
+        if(next){ next.classList.add('active'); try{animateSlide(next);}catch(e){console.warn(e);} }
+        current=n; updateNav();
+    }
+    function changeSlide(dir){ let n=current+dir; if(n<1)n=total; if(n>total)n=1; goToSlide(n); }
+    function updateNav(){ document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current)); counter.textContent=current+' / '+total; }
+    document.addEventListener('keydown',(e)=>{ if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1);} if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1);} });
+    let tX=0;
+    document.addEventListener('touchstart',(e)=>{tX=e.touches[0].clientX;});
+    document.addEventListener('touchend',(e)=>{ const d=tX-e.changedTouches[0].clientX; if(Math.abs(d)>50)changeSlide(d>0?1:-1); });
+
+    function animateSlide(slide){
+        slide.querySelectorAll('.reveal').forEach((el,i)=>{
+            el.style.opacity='0'; el.style.transform='translateY(20px)';
+            Motion.animate(el,{opacity:1,transform:'translateY(0px)'},{type:'spring',stiffness:200,damping:30,delay:i*0.1});
+        });
+        animateSlideEffects(slide);
+    }
+    function animateSlideEffects(slide){
+        slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar,i)=>{
+            bar.classList.add('fill-init');
+            Motion.animate(bar,{width:bar.dataset.width+'%'},{type:'spring',stiffness:100,damping:20,delay:i*0.1});
+        });
+    }
+
+    document.addEventListener('mousemove',(e)=>{
+        const s=document.querySelector('.mouse-spotlight');
+        if(s) s.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px,rgba(118,185,0,0.05),transparent 40%)`;
+    });
+
+    (function(){
+        let mx=window.innerWidth/2,my=window.innerHeight/2;
+        const cx=window.innerWidth/2,cy=window.innerHeight/2;
+        document.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;});
+        (function tick(){
+            const ox=(mx-cx)/cx,oy=(my-cy)/cy;
+            document.querySelectorAll('.deco-shape').forEach(s=>{
+                const sp=parseFloat(s.dataset.speed)||0.03;
+                s.style.transform=`translate(${ox*sp*100}px,${oy*sp*100}px)`;
+            });
+            requestAnimationFrame(tick);
+        })();
+    })();
+
+    window.initParticles=function(canvas,options){
+        if(!canvas) return;
+        const ctx=canvas.getContext('2d');
+        canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight;
+        const interactive=options.interactive!==false;
+        const count=options.count||(interactive?55:18);
+        let mx=-1000,my=-1000;
+        const particles=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*2.5+.8,alpha:Math.random()*.35+.1}));
+        if(interactive){ canvas.addEventListener('mousemove',(e)=>{const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;}); canvas.addEventListener('mouseleave',()=>{mx=-1000;my=-1000;}); }
+        (function animate(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p=>{
+                if(interactive){const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<120){const f=(120-d)/120*2;p.vx+=(dx/d)*f*.1;p.vy+=(dy/d)*f*.1;}}
+                p.vx*=.98;p.vy*=.98;p.x+=p.vx;p.y+=p.vy;
+                if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+                ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(118,185,0,${p.alpha})`;ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        })();
+    };
+    document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:55}));
+    document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:18}));
+    animateSlide(document.querySelector('.slide.active'));
+</script>
+</body>
+</html>

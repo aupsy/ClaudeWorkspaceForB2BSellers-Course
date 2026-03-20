@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="slides-format" content="viewport">
+    <title>Sell Smarter, Not Harder — 5 Lessons in 30 Minutes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@12/dist/motion.js"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #0c1220;
+            --color-bg-deep: #060c18;
+            --color-surface: #162033;
+            --color-text: #f0f4ff;
+            --color-text-secondary: #a8b8d8;
+            --color-text-muted: #5a7099;
+            --color-accent-1: #4F8EF7;
+            --color-accent-2: #A78BFA;
+            --color-accent-3: #34D399;
+            --color-glass-bg: rgba(255,255,255,0.05);
+            --color-glass-border: rgba(255,255,255,0.09);
+            --color-vignette: rgba(0,0,0,0.45);
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+        }
+    </style>
+
+    <style>
+        :root { --color-bg: #0c1220; --color-text: #f0f4ff; --glow-color-rgb: 79,142,247; }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { background: var(--color-bg); margin: 0; }
+        body { font-family: 'DM Sans', system-ui, sans-serif; color: var(--color-text); overflow: hidden; height: 100vh; width: 100vw; }
+        .deck { width: 100vw; height: 100vh; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(0.95); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; overflow: hidden; }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
+        .slide > .content { position: relative; z-index: 2; width: 100%; max-width: 1100px; padding: clamp(1.2rem, 3.5vw, 3rem); }
+        .nav-controls { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 100; background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); padding: 8px 20px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.09); }
+        .nav-btn { width: 34px; height: 34px; border: none; background: rgba(255,255,255,0.06); color: #4F8EF7; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .nav-btn:hover { background: rgba(255,255,255,0.12); }
+        .slide-dots { display: flex; gap: 7px; }
+        .slide-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+        .slide-dots .dot.active { background: #4F8EF7; transform: scale(1.35); }
+        .slide-counter { font-size: 0.72rem; color: rgba(255,255,255,0.3); min-width: 36px; text-align: center; }
+        .reveal { opacity: 0; transform: translateY(20px); }
+
+        @keyframes glow-pulse { 0%,100%{text-shadow:0 0 20px rgba(79,142,247,0.5),0 0 40px rgba(79,142,247,0.2);}50%{text-shadow:0 0 30px rgba(79,142,247,0.8),0 0 60px rgba(79,142,247,0.3);} }
+        .stat-glow { text-shadow: 0 0 30px rgba(79,142,247,0.6), 0 0 60px rgba(79,142,247,0.25); }
+
+        @keyframes float-slow { 0%{transform:translate(0,0) scale(1);}25%{transform:translate(60px,-50px) scale(1.12);}50%{transform:translate(-40px,40px) scale(0.9);}75%{transform:translate(50px,20px) scale(1.08);}100%{transform:translate(0,0) scale(1);} }
+        @keyframes float-drift { 0%{transform:translate(0,0) scale(1) rotate(0deg);}33%{transform:translate(-50px,-60px) scale(1.15) rotate(3deg);}66%{transform:translate(40px,30px) scale(0.88) rotate(-2deg);}100%{transform:translate(0,0) scale(1) rotate(0deg);} }
+        @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);} }
+        .gradient-mesh { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); animation: float-slow 10s ease-in-out infinite; }
+        .blob:nth-child(2) { animation: float-drift 14s ease-in-out infinite; }
+        .blob:nth-child(3) { animation: float-slow 18s ease-in-out infinite reverse; }
+
+        .slide::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); background-repeat:repeat; background-size:256px 256px; opacity:0.03; mix-blend-mode:overlay; }
+        .slide::after { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.45) 100%); }
+
+        /* lesson layout */
+        .lesson-layout { display: grid; grid-template-rows: auto auto 1fr; gap: 0; height: 100%; }
+        .coaching-banner { background: rgba(255,255,255,0.03); border-left: 3px solid #4F8EF7; border-radius: 0 10px 10px 0; padding: 10px 16px; margin-bottom: 14px; }
+        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .ba-before { border-left: 3px solid rgba(239,68,68,0.5); background: rgba(239,68,68,0.05); border-radius: 0 10px 10px 0; padding: 14px 16px; }
+        .ba-after  { border-left: 3px solid #34D399; background: rgba(52,211,153,0.06); border-radius: 0 10px 10px 0; padding: 14px 16px; }
+        .prompt-box { background: rgba(6,12,24,0.9); border: 1px solid rgba(79,142,247,0.25); border-radius: 8px; padding: 11px 14px; font-size: 0.79rem; line-height: 1.6; color: #8fb4f8; margin-top: 6px; }
+        .prompt-label { font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: #4F8EF7; margin-bottom: 4px; }
+
+        /* lesson badge */
+        .lesson-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.22); border-radius: 100px; padding: 4px 14px 4px 4px; margin-bottom: 10px; }
+        .lesson-num { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#4F8EF7,#A78BFA); display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:#fff; }
+        .lesson-text { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #7aa8f8; }
+
+        /* coaching quote style */
+        .coaching-quote { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: clamp(1rem, 2vw, 1.25rem); color: #f0f4ff; line-height: 1.5; }
+        .coaching-sub { font-size: 0.8rem; color: #5a7099; line-height: 1.55; margin-top: 6px; }
+
+        .bar-track { background: rgba(255,255,255,0.06); border-radius: 6px; height: 26px; width: 100%; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 6px; width: 0%; }
+
+        @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.2s !important; } }
+    </style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- ═══ SLIDE 1: TITLE ═══ -->
+<div class="slide slide-1 active" data-slide="1">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:500px;height:500px;top:-120px;right:-100px;background:#4F8EF7;opacity:0.13;"></div>
+        <div class="blob" style="width:350px;height:350px;bottom:-80px;left:-60px;background:#A78BFA;opacity:0.10;"></div>
+        <div class="blob" style="width:200px;height:200px;top:40%;left:10%;background:#34D399;opacity:0.08;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div style="font-size:clamp(3rem,8vw,5rem);margin-bottom:0.8rem;animation:float 3s ease-in-out infinite;" class="reveal">🧠</div>
+        <h1 class="font-display text-[clamp(2rem,5.5vw,3.8rem)] font-black tracking-tight mb-3 reveal" style="background:linear-gradient(135deg,#4F8EF7 0%,#A78BFA 50%,#34D399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sell Smarter, Not Harder</h1>
+        <p class="reveal mb-6" style="font-size:clamp(0.9rem,1.6vw,1.15rem);color:#5a7099;letter-spacing:4px;text-transform:uppercase;">5 Sales Lessons · 30 Minutes · Claude Cowork</p>
+        <div class="reveal" style="display:inline-block;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px 28px;max-width:520px;">
+            <p style="font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(0.95rem,1.8vw,1.1rem);color:#a8b8d8;line-height:1.6;margin:0;">"The best sellers don't work harder than everyone else. They've just eliminated the work that doesn't move deals."</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 2: THE PROBLEM ═══ -->
+<div class="slide slide-2" data-slide="2">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:400px;height:400px;top:-80px;right:-60px;background:#ef4444;opacity:0.07;"></div>
+        <div class="blob" style="width:280px;height:280px;bottom:-60px;left:-40px;background:#4F8EF7;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">The Reality Check</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.8vw,2.8rem)] font-bold mb-2 reveal" style="color:#f0f4ff;">Most of your week <em>isn't</em> selling.</h2>
+        <p class="reveal mb-6" style="font-size:0.88rem;color:#5a7099;">Studies across enterprise sales teams consistently show the same pattern:</p>
+        <div class="grid grid-cols-3 gap-4 reveal mb-5">
+            <div class="text-center" style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:14px;padding:20px 12px;">
+                <div class="stat-glow font-display font-black" style="font-size:clamp(2rem,4.5vw,3.2rem);color:#f87171;" data-count="65" data-suffix="%">0%</div>
+                <div style="font-size:0.77rem;color:#a8b8d8;margin-top:5px;line-height:1.4;">of a rep's week on admin, research &amp; writing — not selling</div>
+            </div>
+            <div class="text-center" style="background:rgba(79,142,247,0.07);border:1px solid rgba(79,142,247,0.18);border-radius:14px;padding:20px 12px;">
+                <div class="stat-glow font-display font-black" style="font-size:clamp(2rem,4.5vw,3.2rem);color:#7aa8f8;" data-count="4" data-suffix="hrs">0hrs</div>
+                <div style="font-size:0.77rem;color:#a8b8d8;margin-top:5px;line-height:1.4;">lost per day to tasks Claude can do in minutes</div>
+            </div>
+            <div class="text-center" style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.18);border-radius:14px;padding:20px 12px;">
+                <div class="stat-glow font-display font-black" style="font-size:clamp(2rem,4.5vw,3.2rem);color:#6ee7b7;" data-count="3" data-suffix="x">0x</div>
+                <div style="font-size:0.77rem;color:#a8b8d8;margin-top:5px;line-height:1.4;">more pipeline capacity when you reclaim that time</div>
+            </div>
+        </div>
+        <div class="reveal" style="background:rgba(79,142,247,0.07);border:1px solid rgba(79,142,247,0.16);border-radius:10px;padding:12px 18px;">
+            <p style="font-size:0.84rem;color:#a8b8d8;margin:0;">Today's session: 5 places where that time disappears — and how top reps get it back.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 3: HOW THIS WORKS ═══ -->
+<div class="slide slide-3" data-slide="3">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:360px;height:360px;top:-70px;right:-50px;background:#A78BFA;opacity:0.08;"></div>
+        <div class="blob" style="width:240px;height:240px;bottom:-50px;left:-40px;background:#34D399;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">How This Talk Works</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.8vw,2.8rem)] font-bold mb-6 reveal" style="color:#f0f4ff;">Each lesson: a sales principle you already know, applied at 10×.</h2>
+        <div class="grid grid-cols-3 gap-4 reveal mb-5">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:8px;">📌</div>
+                <div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;margin-bottom:5px;">The Principle</div>
+                <div style="font-size:0.77rem;color:#5a7099;">A coaching insight every great seller lives by</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:8px;">⏱</div>
+                <div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;margin-bottom:5px;">The Old Way</div>
+                <div style="font-size:0.77rem;color:#5a7099;">How most reps apply it — slowly, manually</div>
+            </div>
+            <div style="background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.18);border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:8px;">⚡</div>
+                <div style="font-weight:600;font-size:0.88rem;color:#7aa8f8;margin-bottom:5px;">The New Way</div>
+                <div style="font-size:0.77rem;color:#5a7099;">Claude Cowork applies the same principle in seconds</div>
+            </div>
+        </div>
+        <div class="reveal" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.2rem;">💡</span>
+            <span style="font-size:0.83rem;color:#a8b8d8;">You'll leave with 5 prompts you can copy and run before your next call. No setup required — just paste and go.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 4: LESSON 1 — PRE-CALL INTELLIGENCE ═══ -->
+<div class="slide slide-4" data-slide="4">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#4F8EF7;opacity:0.08;"></div>
+        <div class="blob" style="width:210px;height:210px;bottom:-40px;left:-30px;background:#A78BFA;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="lesson-badge reveal">
+            <div class="lesson-num">1</div>
+            <span class="lesson-text">Pre-Call Intelligence</span>
+        </div>
+        <div class="coaching-banner reveal">
+            <div class="coaching-quote">"The reps who win show up knowing more than the buyer expects."</div>
+            <div class="coaching-sub">Sellers who reference a specific trigger — a hire, earnings call, reorg, or press release — get 3× more responses than those who lead with product. Preparation <em>is</em> the differentiator.</div>
+        </div>
+        <div class="ba-grid reveal">
+            <div class="ba-before">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px;">⏱ Old Way — 45 min before each call</div>
+                <ul style="font-size:0.81rem;color:#a8b8d8;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li>🔍 LinkedIn + company site + 8 browser tabs</li>
+                    <li>📰 Googling for recent news — mostly noise</li>
+                    <li>📋 Copy-pasting notes into a doc by hand</li>
+                    <li>😓 Running out of time; go in half-prepared</li>
+                </ul>
+            </div>
+            <div class="ba-after">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:6px;">⚡ New Way — 90 seconds</div>
+                <div class="prompt-label">Your Claude Cowork Prompt</div>
+                <div class="prompt-box">"Research [Company] for my call today. Give me: their top strategic priority this quarter, a recent trigger event (news, hire, earnings), and 3 conversation hooks tied to our solution."</div>
+                <div style="font-size:0.72rem;color:#34D399;margin-top:7px;">→ Arrives knowing what the buyer cares about right now.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 5: LESSON 2 — INSIGHT-LED OUTREACH ═══ -->
+<div class="slide slide-5" data-slide="5">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:350px;height:350px;top:-60px;right:-50px;background:#A78BFA;opacity:0.09;"></div>
+        <div class="blob" style="width:210px;height:210px;bottom:-40px;left:-30px;background:#4F8EF7;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="lesson-badge reveal" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.22);">
+            <div class="lesson-num" style="background:linear-gradient(135deg,#A78BFA,#4F8EF7);">2</div>
+            <span class="lesson-text" style="color:#c4b0ff;">Insight-Led Outreach</span>
+        </div>
+        <div class="coaching-banner reveal" style="border-left-color:#A78BFA;">
+            <div class="coaching-quote">"Nobody replies to emails about you. They reply to emails about <em>them</em>."</div>
+            <div class="coaching-sub">The #1 reason cold emails fail: they open with the seller's product, not the buyer's world. An email that references something real about their business — a launch, a challenge, a strategic bet — earns 4–6× higher reply rates.</div>
+        </div>
+        <div class="ba-grid reveal">
+            <div class="ba-before">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px;">❌ Feature-First — 2% reply rate</div>
+                <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:11px 13px;font-size:0.79rem;color:#7a8aa8;font-style:italic;line-height:1.6;">"Hi [Name], I'd love to show you how our platform helps teams like yours save time and improve efficiency. Are you free for a quick 15-min call?"</div>
+                <div style="font-size:0.71rem;color:#f87171;margin-top:7px;">↑ Sounds like every other email in their inbox.</div>
+            </div>
+            <div class="ba-after">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:6px;">✅ Insight-First — Live Demo</div>
+                <div class="prompt-label">Your Claude Cowork Prompt</div>
+                <div class="prompt-box">"Write a cold email to [Name], VP Sales at [Company]. They just [recent trigger]. Lead with an insight about how this impacts their team, then connect it to one problem we solve. Under 80 words. No fluff."</div>
+                <div style="font-size:0.71rem;color:#34D399;margin-top:7px;">→ Feels like 30 min of homework in their inbox.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 6: LESSON 3 — POST-CALL MOMENTUM ═══ -->
+<div class="slide slide-6" data-slide="6">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#34D399;opacity:0.08;"></div>
+        <div class="blob" style="width:210px;height:210px;bottom:-40px;left:-30px;background:#4F8EF7;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="lesson-badge reveal" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.22);">
+            <div class="lesson-num" style="background:linear-gradient(135deg,#34D399,#4F8EF7);">3</div>
+            <span class="lesson-text" style="color:#6ee7b7;">Post-Call Momentum</span>
+        </div>
+        <div class="coaching-banner reveal" style="border-left-color:#34D399;">
+            <div class="coaching-quote">"The follow-up is where most deals are won — or quietly lost."</div>
+            <div class="coaching-sub">67% of deals stall because the seller fails to reinforce value after the call. A same-day follow-up that mirrors the buyer's exact words — not generic next steps — keeps the deal moving and separates you from every other rep they spoke to.</div>
+        </div>
+        <div class="ba-grid reveal">
+            <div class="ba-before">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px;">⏱ Old Way — 30–45 min post-call</div>
+                <ul style="font-size:0.81rem;color:#a8b8d8;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li>📝 Reconstruct notes 3 hours after the call</li>
+                    <li>💻 Manual CRM update — fields half-filled</li>
+                    <li>✉️ Generic "great to connect" follow-up email</li>
+                    <li>😬 Buyer forgets what made the call exciting</li>
+                </ul>
+            </div>
+            <div class="ba-after">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:6px;">⚡ New Way — 3 minutes</div>
+                <div class="prompt-label">Your Claude Cowork Prompt</div>
+                <div class="prompt-box">"Here's my call transcript: [paste]. Extract key pain points, agreed next steps, and draft a follow-up email that quotes something specific they said. Format CRM notes in bullet form."</div>
+                <div style="font-size:0.71rem;color:#34D399;margin-top:7px;">→ Buyer thinks: "This rep actually listened."</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 7: LESSON 4 — BESPOKE PROPOSALS ═══ -->
+<div class="slide slide-7" data-slide="7">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#f59e0b;opacity:0.07;"></div>
+        <div class="blob" style="width:210px;height:210px;bottom:-40px;left:-30px;background:#A78BFA;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="lesson-badge reveal" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.22);">
+            <div class="lesson-num" style="background:linear-gradient(135deg,#f59e0b,#F97316);">4</div>
+            <span class="lesson-text" style="color:#fcd34d;">Bespoke Proposals</span>
+        </div>
+        <div class="coaching-banner reveal" style="border-left-color:#f59e0b;">
+            <div class="coaching-quote">"A proposal isn't a brochure. It's a mirror that shows the buyer their own problem — solved."</div>
+            <div class="coaching-sub">Buyers reject proposals that feel generic. The ones that win reference the buyer's exact language from discovery, quantify their stated pain in their own words, and make "yes" feel obvious — not risky. Most reps send brochures. Top reps send mirrors.</div>
+        </div>
+        <div class="ba-grid reveal">
+            <div class="ba-before">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px;">⏱ Old Way — 3–4 hours</div>
+                <ul style="font-size:0.81rem;color:#a8b8d8;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li>📄 Copy last proposal, find-and-replace names</li>
+                    <li>🤔 Generic "why us" section that fits no one</li>
+                    <li>📊 ROI numbers not tied to what buyer said</li>
+                    <li>😬 Buyer reads a doc that could be for anyone</li>
+                </ul>
+            </div>
+            <div class="ba-after">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:6px;">⚡ New Way — 45 minutes</div>
+                <div class="prompt-label">Your Claude Cowork Prompt</div>
+                <div class="prompt-box">"Using my discovery notes, write the executive summary for [Company]'s proposal. Mirror their language, quantify their stated priority of [X], and frame our solution as the lowest-risk path to that outcome."</div>
+                <div style="font-size:0.71rem;color:#34D399;margin-top:7px;">→ Buyer thinks: "They actually understood us."</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 8: LESSON 5 — PIPELINE COMMAND ═══ -->
+<div class="slide slide-8" data-slide="8">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#A78BFA;opacity:0.09;"></div>
+        <div class="blob" style="width:210px;height:210px;bottom:-40px;left:-30px;background:#34D399;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <div class="lesson-badge reveal" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.22);">
+            <div class="lesson-num" style="background:linear-gradient(135deg,#A78BFA,#34D399);">5</div>
+            <span class="lesson-text" style="color:#c4b0ff;">Pipeline Command</span>
+        </div>
+        <div class="coaching-banner reveal" style="border-left-color:#A78BFA;">
+            <div class="coaching-quote">"Reactive sellers chase. Proactive sellers lead."</div>
+            <div class="coaching-sub">Top performers review their pipeline every Friday and arrive Monday with a clear offensive plan — knowing which deal needs a nudge, which is at risk, and which conversation needs a reframe. They don't respond to the week. They direct it.</div>
+        </div>
+        <div class="ba-grid reveal">
+            <div class="ba-before">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px;">⏱ Old Way — Monday morning chaos</div>
+                <ul style="font-size:0.81rem;color:#a8b8d8;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
+                    <li>😤 9am: still figuring out priorities</li>
+                    <li>📬 Inbox triage eats the whole first hour</li>
+                    <li>🗓 Calls start before any prep is done</li>
+                    <li>🏃 Reactive all week — never in control</li>
+                </ul>
+            </div>
+            <div class="ba-after">
+                <div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:6px;">⚡ New Way — 8 min Friday 4pm</div>
+                <div class="prompt-label">Your Claude Cowork Prompt</div>
+                <div class="prompt-box">"Review my open pipeline. For each deal meeting this week: a 3-bullet prep brief with last interaction, key next step, and one risk to address. Flag the 2 deals most likely to slip and why."</div>
+                <div style="font-size:0.71rem;color:#34D399;margin-top:7px;">→ Arrives Monday already ahead of the week.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 9: THE COMPOUND EFFECT ═══ -->
+<div class="slide slide-9" data-slide="9">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-60px;background:#34D399;opacity:0.09;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#4F8EF7;opacity:0.07;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">The Compound Effect</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.8vw,2.6rem)] font-bold mb-1 reveal" style="color:#f0f4ff;">5 principles applied faster = compounding returns.</h2>
+        <p class="reveal mb-5" style="font-size:0.83rem;color:#5a7099;">Time reclaimed per week when each lesson becomes a habit:</p>
+        <div style="display:flex;flex-direction:column;gap:9px;" class="reveal">
+            <div style="display:grid;grid-template-columns:180px 1fr 64px;align-items:center;gap:10px;">
+                <div style="font-size:0.8rem;color:#a8b8d8;">Pre-Call Intelligence</div>
+                <div class="bar-track"><div class="bar-fill" data-width="80" style="background:linear-gradient(90deg,#4F8EF7,#6aa0f8);"></div></div>
+                <div style="font-size:0.78rem;color:#4F8EF7;text-align:right;">~4 hrs</div>
+            </div>
+            <div style="display:grid;grid-template-columns:180px 1fr 64px;align-items:center;gap:10px;">
+                <div style="font-size:0.8rem;color:#a8b8d8;">Insight-Led Outreach</div>
+                <div class="bar-track"><div class="bar-fill" data-width="60" style="background:linear-gradient(90deg,#A78BFA,#c4b0ff);"></div></div>
+                <div style="font-size:0.78rem;color:#A78BFA;text-align:right;">~3 hrs</div>
+            </div>
+            <div style="display:grid;grid-template-columns:180px 1fr 64px;align-items:center;gap:10px;">
+                <div style="font-size:0.8rem;color:#a8b8d8;">Post-Call Momentum</div>
+                <div class="bar-track"><div class="bar-fill" data-width="70" style="background:linear-gradient(90deg,#34D399,#6ee7b7);"></div></div>
+                <div style="font-size:0.78rem;color:#34D399;text-align:right;">~3.5 hrs</div>
+            </div>
+            <div style="display:grid;grid-template-columns:180px 1fr 64px;align-items:center;gap:10px;">
+                <div style="font-size:0.8rem;color:#a8b8d8;">Bespoke Proposals</div>
+                <div class="bar-track"><div class="bar-fill" data-width="90" style="background:linear-gradient(90deg,#f59e0b,#fcd34d);"></div></div>
+                <div style="font-size:0.78rem;color:#fcd34d;text-align:right;">~4.5 hrs</div>
+            </div>
+            <div style="display:grid;grid-template-columns:180px 1fr 64px;align-items:center;gap:10px;">
+                <div style="font-size:0.8rem;color:#a8b8d8;">Pipeline Command</div>
+                <div class="bar-track"><div class="bar-fill" data-width="50" style="background:linear-gradient(90deg,#f472b6,#f9a8d4);"></div></div>
+                <div style="font-size:0.78rem;color:#f9a8d4;text-align:right;">~2.5 hrs</div>
+            </div>
+        </div>
+        <div class="reveal mt-5" style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.18);border-radius:10px;padding:13px 18px;display:flex;align-items:center;gap:14px;">
+            <div class="font-display font-black" style="font-size:2.2rem;color:#34D399;" data-count="25" data-suffix="hrs">0hrs</div>
+            <div style="font-size:0.83rem;color:#a8b8d8;">freed per week. That's <strong style="color:#f0f4ff;">3+ extra months</strong> of selling time per year — without hiring a single person.</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 10: YOUR FIRST 15 MINUTES ═══ -->
+<div class="slide slide-10" data-slide="10">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:#4F8EF7;opacity:0.08;"></div>
+        <div class="blob" style="width:220px;height:220px;bottom:-50px;left:-30px;background:#A78BFA;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">Your First 15 Minutes</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.8vw,2.6rem)] font-bold mb-2 reveal" style="color:#f0f4ff;">Set up your Sales Project <em>before lunch today.</em></h2>
+        <p class="reveal mb-5" style="font-size:0.83rem;color:#5a7099;">Claude Projects give Claude persistent memory of your ICP, product, and pipeline — so every prompt gets smarter over time.</p>
+        <div style="position:relative;padding-left:26px;" class="reveal">
+            <div style="position:absolute;left:9px;top:12px;bottom:12px;width:2px;background:linear-gradient(180deg,#4F8EF7,#A78BFA,#34D399,#f59e0b);border-radius:2px;"></div>
+            <div style="display:flex;flex-direction:column;gap:13px;">
+                <div style="display:flex;gap:13px;align-items:flex-start;">
+                    <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:linear-gradient(135deg,#4F8EF7,#6aa0f8);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;margin-left:-20px;">1</div>
+                    <div><div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;">Open Claude.ai → New Project → "Sales Workspace"</div><div style="font-size:0.76rem;color:#5a7099;margin-top:2px;">Takes 30 seconds. This is your persistent AI sales context.</div></div>
+                </div>
+                <div style="display:flex;gap:13px;align-items:flex-start;">
+                    <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:linear-gradient(135deg,#A78BFA,#c4b0ff);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;margin-left:-20px;">2</div>
+                    <div><div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;">Paste your ICP, top objections &amp; product one-pager</div><div style="font-size:0.76rem;color:#5a7099;margin-top:2px;">Claude remembers this across every conversation. No re-explaining.</div></div>
+                </div>
+                <div style="display:flex;gap:13px;align-items:flex-start;">
+                    <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:linear-gradient(135deg,#34D399,#6ee7b7);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;margin-left:-20px;">3</div>
+                    <div><div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;">Run Lesson 1: paste your next meeting's company name</div><div style="font-size:0.76rem;color:#5a7099;margin-top:2px;">Get your first pre-call brief in 90 seconds. That's the moment it clicks.</div></div>
+                </div>
+                <div style="display:flex;gap:13px;align-items:flex-start;">
+                    <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fcd34d);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;margin-left:-20px;">4</div>
+                    <div><div style="font-weight:600;font-size:0.88rem;color:#f0f4ff;">Share one output in your team Slack</div><div style="font-size:0.76rem;color:#5a7099;margin-top:2px;">Nothing spreads a habit faster than a teammate asking "wait — how did you do that?"</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 11: LEVEL 2 — CONNECT YOUR TOOLS ═══ -->
+<div class="slide slide-11" data-slide="11">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:400px;height:400px;top:-80px;right:-60px;background:#34D399;opacity:0.09;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-40px;background:#4F8EF7;opacity:0.07;"></div>
+        <div class="blob" style="width:180px;height:180px;top:40%;left:12%;background:#A78BFA;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">Level 2 &middot; After Your Homework</p>
+        <h2 class="font-display text-[clamp(1.6rem,3.5vw,2.4rem)] font-bold mb-4 reveal" style="color:#f0f4ff;">Stop copying &amp; pasting. <em>Connect Claude to your actual tools.</em></h2>
+        <div class="grid grid-cols-2 gap-5 reveal">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:18px;">
+                <div style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;margin-bottom:10px;font-weight:600;">What becomes possible</div>
+                <div style="display:flex;flex-direction:column;gap:9px;">
+                    <div style="display:flex;align-items:flex-start;gap:9px;"><span style="color:#34D399;font-size:0.85rem;margin-top:1px;">&#x2756;</span><span style="font-size:0.8rem;color:#c8d8f0;line-height:1.5;">Claude reads your <strong style="color:#f0f4ff;">Salesforce pipeline live</strong> &mdash; no export needed</span></div>
+                    <div style="display:flex;align-items:flex-start;gap:9px;"><span style="color:#34D399;font-size:0.85rem;margin-top:1px;">&#x2756;</span><span style="font-size:0.8rem;color:#c8d8f0;line-height:1.5;"><strong style="color:#f0f4ff;">Gong / Chorus call recordings</strong> auto-feed after every call &mdash; zero copy-paste</span></div>
+                    <div style="display:flex;align-items:flex-start;gap:9px;"><span style="color:#34D399;font-size:0.85rem;margin-top:1px;">&#x2756;</span><span style="font-size:0.8rem;color:#c8d8f0;line-height:1.5;">Pulls <strong style="color:#f0f4ff;">calendar + LinkedIn context</strong> before every meeting automatically</span></div>
+                    <div style="display:flex;align-items:flex-start;gap:9px;"><span style="color:#34D399;font-size:0.85rem;margin-top:1px;">&#x2756;</span><span style="font-size:0.8rem;color:#c8d8f0;line-height:1.5;">Drafts and sends <strong style="color:#f0f4ff;">Gmail follow-ups</strong> directly from Claude</span></div>
+                    <div style="display:flex;align-items:flex-start;gap:9px;"><span style="color:#34D399;font-size:0.85rem;margin-top:1px;">&#x2756;</span><span style="font-size:0.8rem;color:#c8d8f0;line-height:1.5;">Updates <strong style="color:#f0f4ff;">HubSpot deals</strong> from call notes &mdash; no manual CRM entry</span></div>
+                </div>
+                <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-size:0.68rem;color:#5a7099;margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase;">Works today with</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                        <span style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#34D399;">Salesforce</span>
+                        <span style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#7aa8f8;">HubSpot</span>
+                        <span style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#c4b0ff;">Gmail</span>
+                        <span style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#fcd34d;">Gong</span>
+                        <span style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#34D399;">Slack</span>
+                        <span style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#7aa8f8;">Google Drive</span>
+                        <span style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:6px;padding:3px 8px;font-size:0.67rem;color:#c4b0ff;">Notion</span>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);border-radius:14px;padding:18px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                        <span style="font-size:1.2rem;">&#x1F50C;</span>
+                        <span style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#34D399;font-weight:600;">What is MCP?</span>
+                        <span style="background:rgba(52,211,153,0.12);border-radius:4px;padding:2px 7px;font-size:0.62rem;color:#34D399;font-weight:600;letter-spacing:0.06em;">Model Context Protocol</span>
+                    </div>
+                    <p style="font-size:0.79rem;color:#c8d8f0;line-height:1.65;margin:0;">Think of MCP like a <strong style="color:#f0f4ff;">universal plug socket for AI</strong>. Just like USB lets any device talk to any computer, MCP lets Claude talk to any app &mdash; your CRM, your calendar, your inbox, your call recorder.</p>
+                    <p style="font-size:0.79rem;color:#c8d8f0;line-height:1.65;margin-top:8px;margin-bottom:0;">Once connected, <strong style="color:#34D399;">Claude doesn&apos;t need you to paste anything</strong>. It already knows what&apos;s in your pipeline, who you called, and what was said.</p>
+                </div>
+                <div style="background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.15);border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:10px;">
+                    <span style="font-size:1.1rem;margin-top:1px;">&#x1F4C5;</span>
+                    <div>
+                        <div style="font-size:0.75rem;font-weight:600;color:#f0f4ff;margin-bottom:4px;">Your Week 2 homework</div>
+                        <div style="font-size:0.75rem;color:#8a9bbf;line-height:1.5;">Install one MCP connector &mdash; start with Salesforce or Gmail. The full course walks you through the exact setup, step by step.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 12: THE FULL COURSE ═══ -->
+<div class="slide slide-12" data-slide="12">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:360px;height:360px;top:-70px;right:-50px;background:#A78BFA;opacity:0.09;"></div>
+        <div class="blob" style="width:230px;height:230px;bottom:-50px;left:-30px;background:#4F8EF7;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal mb-1" style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a7099;">Want to Go Deeper?</p>
+        <h2 class="font-display text-[clamp(1.7rem,3.8vw,2.6rem)] font-bold mb-2 reveal" style="color:#f0f4ff;">Want to automate your complete sales workflow?</h2>
+        <p class="reveal mb-5" style="font-size:0.83rem;color:#5a7099;">Each 60-minute module builds one of today's 5 lessons into a repeatable workflow you leave with.</p>
+        <div class="grid grid-cols-3 gap-3 reveal mb-4">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;">
+                <div style="font-size:1.3rem;margin-bottom:6px;">🏗️</div>
+                <div style="font-weight:600;font-size:0.84rem;color:#f0f4ff;margin-bottom:3px;">Module 1 · Setup</div>
+                <div style="font-size:0.74rem;color:#5a7099;">Your Sales Project configured and loaded — 60 min</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;">
+                <div style="font-size:1.3rem;margin-bottom:6px;">🔍</div>
+                <div style="font-weight:600;font-size:0.84rem;color:#f0f4ff;margin-bottom:3px;">Module 2 · Research</div>
+                <div style="font-size:0.74rem;color:#5a7099;">Account intelligence at scale — 60 min</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;">
+                <div style="font-size:1.3rem;margin-bottom:6px;">✉️</div>
+                <div style="font-weight:600;font-size:0.84rem;color:#f0f4ff;margin-bottom:3px;">Module 3 · Outreach</div>
+                <div style="font-size:0.74rem;color:#5a7099;">Sequences, cold emails, follow-ups — 60 min</div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 reveal mb-4">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;gap:10px;align-items:flex-start;">
+                <div style="font-size:1.3rem;">📞</div>
+                <div><div style="font-weight:600;font-size:0.84rem;color:#f0f4ff;margin-bottom:3px;">Module 4 · Discovery &amp; Follow-Up</div><div style="font-size:0.74rem;color:#5a7099;">Call prep, recap, CRM, same-day follow-up — 60 min</div></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;gap:10px;align-items:flex-start;">
+                <div style="font-size:1.3rem;">📄</div>
+                <div><div style="font-weight:600;font-size:0.84rem;color:#f0f4ff;margin-bottom:3px;">Module 5 · Proposals &amp; Pipeline</div><div style="font-size:0.74rem;color:#5a7099;">Bespoke proposals, objection handling, Friday review — 60 min</div></div>
+            </div>
+        </div>
+        <div class="reveal" style="background:rgba(79,142,247,0.07);border:1px solid rgba(79,142,247,0.16);border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.1rem;">🎓</span>
+            <span style="font-size:0.82rem;color:#a8b8d8;">No slides-only lectures. Every module ends with a real deliverable — a brief, an email, a proposal section — that reps use the next day.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ SLIDE 13: CLOSING CTA ═══ -->
+<div class="slide slide-13" data-slide="13">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:500px;height:500px;top:-120px;right:-100px;background:#4F8EF7;opacity:0.13;"></div>
+        <div class="blob" style="width:350px;height:350px;bottom:-80px;left:-60px;background:#A78BFA;opacity:0.10;"></div>
+        <div class="blob" style="width:200px;height:200px;top:38%;left:10%;background:#34D399;opacity:0.08;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div style="font-size:clamp(2.8rem,7vw,4.5rem);margin-bottom:0.8rem;animation:float 3s ease-in-out infinite;" class="reveal">🚀</div>
+        <h1 class="font-display text-[clamp(1.9rem,5vw,3.4rem)] font-black tracking-tight mb-3 reveal" style="background:linear-gradient(135deg,#4F8EF7 0%,#A78BFA 50%,#34D399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Pick one lesson. Apply it today.</h1>
+        <p class="reveal mb-6" style="font-size:0.92rem;color:#5a7099;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">You don't have to change everything at once. Pick the principle that resonates most — and spend 15 minutes applying it before your next call.</p>
+        <div class="grid grid-cols-5 gap-3 reveal" style="max-width:680px;margin:0 auto;">
+            <div style="background:rgba(79,142,247,0.1);border:1px solid rgba(79,142,247,0.2);border-radius:10px;padding:10px 6px;text-align:center;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size:1.1rem;">🔍</div><div style="font-size:0.65rem;color:#7aa8f8;margin-top:4px;line-height:1.3;">Pre-Call<br>Intel</div>
+            </div>
+            <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:10px 6px;text-align:center;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size:1.1rem;">✉️</div><div style="font-size:0.65rem;color:#c4b0ff;margin-top:4px;line-height:1.3;">Insight<br>Outreach</div>
+            </div>
+            <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:10px 6px;text-align:center;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size:1.1rem;">📞</div><div style="font-size:0.65rem;color:#6ee7b7;margin-top:4px;line-height:1.3;">Post-Call<br>Momentum</div>
+            </div>
+            <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 6px;text-align:center;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size:1.1rem;">📄</div><div style="font-size:0.65rem;color:#fcd34d;margin-top:4px;line-height:1.3;">Bespoke<br>Proposals</div>
+            </div>
+            <div style="background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.2);border-radius:10px;padding:10px 6px;text-align:center;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size:1.1rem;">📅</div><div style="font-size:0.65rem;color:#f9a8d4;margin-top:4px;line-height:1.3;">Pipeline<br>Command</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav-controls">
+    <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+    <span class="slide-counter" id="counter">1 / 13</span>
+</div>
+
+<script>
+    let current = 1;
+    const total = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    for (let i = 1; i <= total; i++) { const dot = document.createElement('div'); dot.className = 'dot' + (i === 1 ? ' active' : ''); dot.onclick = () => goToSlide(i); dotsContainer.appendChild(dot); }
+    function goToSlide(n) {
+        const prev = document.querySelector('.slide.active');
+        const next = document.querySelector(`.slide[data-slide="${n}"]`);
+        if (prev) prev.classList.remove('active');
+        if (next) { next.classList.add('active'); try { animateSlide(next); } catch(e) {} }
+        current = n; updateNav();
+    }
+    function changeSlide(dir) { let n = current + dir; if (n < 1) n = total; if (n > total) n = 1; goToSlide(n); }
+    function updateNav() { document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current)); counter.textContent = current + ' / ' + total; }
+    document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } });
+    let tX = 0;
+    document.addEventListener('touchstart', (e) => { tX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => { const d = tX - e.changedTouches[0].clientX; if (Math.abs(d) > 50) changeSlide(d > 0 ? 1 : -1); });
+
+    function animateSlide(slide) {
+        slide.querySelectorAll('.reveal').forEach((el, i) => {
+            el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+            Motion.animate(el, { opacity: 1, transform: 'translateY(0px)' }, { type: 'spring', stiffness: 200, damping: 30, delay: i * 0.1 });
+        });
+        animateSlideEffects(slide);
+    }
+    function animateSlideEffects(slide) {
+        slide.querySelectorAll('[data-count]:not(.counted)').forEach(el => {
+            el.classList.add('counted');
+            const target = parseInt(el.dataset.count), suffix = el.dataset.suffix || '';
+            let cur = 0; const step = target / 40;
+            const t = setInterval(() => { cur += step; if (cur >= target) { cur = target; clearInterval(t); } el.textContent = Math.round(cur).toLocaleString() + suffix; }, 30);
+        });
+        slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar, i) => {
+            bar.classList.add('fill-init');
+            Motion.animate(bar, { width: bar.dataset.width + '%' }, { type: 'spring', stiffness: 100, damping: 20, delay: i * 0.12 });
+        });
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        const s = document.querySelector('.mouse-spotlight');
+        if (s) s.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(79,142,247,0.05), transparent 40%)`;
+    });
+
+    window.initParticles = function(canvas, opts) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+        const interactive = opts.interactive !== false, count = opts.count || (interactive ? 45 : 16);
+        let mx = -1000, my = -1000;
+        const pts = Array.from({length: count}, () => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, size: Math.random()*2+0.8, alpha: Math.random()*.28+0.08 }));
+        if (interactive) { canvas.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; }); canvas.addEventListener('mouseleave', () => { mx=-1000; my=-1000; }); }
+        (function loop() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            pts.forEach(p => {
+                if (interactive) { const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy); if (d<100) { const f=(100-d)/100*2; p.vx+=(dx/d)*f*.1; p.vy+=(dy/d)*f*.1; } }
+                p.vx*=.98; p.vy*=.98; p.x+=p.vx; p.y+=p.vy;
+                if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0; if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+                ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle=`rgba(79,142,247,${p.alpha})`; ctx.fill();
+            });
+            requestAnimationFrame(loop);
+        })();
+    };
+    document.querySelectorAll('.particle-canvas').forEach(c => initParticles(c, {interactive:true,count:45}));
+    document.querySelectorAll('.particle-canvas-ambient').forEach(c => initParticles(c, {interactive:false,count:16}));
+
+    animateSlide(document.querySelector('.slide.active'));
+</script>
+</body>
+</html>
