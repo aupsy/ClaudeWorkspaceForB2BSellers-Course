@@ -100,6 +100,8 @@ This is private, non-judgmental practice. The coaching note it produces feeds in
 Before leaving Module 2, use `Course-Materials/spear-framework.md` to identify one more workflow in your week that should become a Skill. Any workflow scoring 3+ out of 5 is worth building.
 
 > **Note**: You're identifying candidates here, not building them yet. Write down your top 1–2 workflows on paper. In Module 5 you'll come back to this list and actually build the Skill — the SPEAR score tells you which one to prioritize first.
+>
+> **Stuck on S or P?** See the "New to Claude?" callout and calibration examples at the top of the scoring table in `spear-framework.md`. Score S and P based on how the *task* is structured — not on how you've been using Claude today.
 
 ### Module 2 deliverable
 - Customized `account-research` SKILL.md (your preferred output format + O→E→A discovery questions)

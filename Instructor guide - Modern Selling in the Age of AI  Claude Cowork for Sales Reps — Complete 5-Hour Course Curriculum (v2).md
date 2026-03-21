@@ -168,13 +168,30 @@ Use SPEAR to identify which of your workflows belong in a Skill:[^6]
 
 | Criteria | Question |
 |----------|---------|
-| **S — Standardized** | Does this workflow follow the same pattern every time? |
-| **P — Prompt-heavy** | Am I re-explaining the same context to Claude repeatedly? |
-| **E — Error-prone** | Does manual execution introduce inconsistencies? |
+| **S — Standardized** | Does this task always start with the same type of input and end with the same type of output — regardless of the account? |
+| **P — Prompt-heavy** | Would executing this task well require a lot of upfront explaining — your company, product, tone, rules — before anyone could do it properly? |
+| **E — Error-prone** | Does manual execution introduce inconsistencies I wouldn't want a buyer to see? |
 | **A — Accounting for time** | Does this consume 30+ minutes per rep per week? |
 | **R — Reusable** | Would more than one person on the team use this? |
 
 Any workflow scoring 3+ is worth building a Skill for.
+
+**Facilitation note — running this with day-1 students:**
+
+Students can self-score E, A, and R immediately — those are about their existing work habits, not their Claude experience. S and P are the ones that need a brief walk-through because the natural instinct is to answer them in terms of Claude usage ("I haven't used Claude enough to know").
+
+Redirect with this framing before releasing students to score:
+
+> *"For S: don't think about Claude yet — just think about the task itself. Does a post-call CRM update always look the same? Same inputs (call notes), same outputs (filled fields)? Yes. Does a one-off executive escalation email always look the same? No — every situation is different. That's the test."*
+>
+> *"For P: imagine explaining this task to a smart new hire on their first day. Cold email? You'd have to explain your ICP, your tone, which phrases to avoid, what CTA to use, how we position against competitors — a lot of context. That context is what makes it Prompt-heavy. Scheduling a meeting? Almost no explanation needed."*
+
+**Suggested 2-minute facilitation sequence:**
+1. Hand out (or point to) `Course-Materials/spear-framework.md`
+2. Show the two pre-scored calibration examples at the top of the table — post-call CRM update (5/5) and one-off escalation email (0/5) — and ask: "Why does the CRM update score high on S and P? Why does the escalation email score zero?" Let 2–3 students answer.
+3. Then say: "Now score 2–3 of your own workflows. Write your top candidate on paper — we'll come back to it in Module 5 to actually build the Skill."
+
+The calibration step prevents the most common failure mode: students marking everything as a 1 because they're unsure, ending up with artificially high scores that don't actually guide Skill-building priority.
 
 ### The Discovery Roleplay (10 min)
 

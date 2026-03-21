@@ -8,11 +8,15 @@ Use this to identify which of your weekly workflows should become a Claude Skill
 
 | Letter | Criteria | Question |
 |--------|---------|---------|
-| **S** | **Standardized** | Does this workflow follow the same pattern every time? |
-| **P** | **Prompt-heavy** | Am I re-explaining the same context to Claude repeatedly? |
+| **S** | **Standardized** | Does this task always start with the same type of input and end with the same type of output — regardless of the account? |
+| **P** | **Prompt-heavy** | Would executing this task well require a lot of upfront explaining — your company context, product, tone, rules — before anyone could do it properly? |
 | **E** | **Error-prone** | Does manual execution introduce inconsistencies I wouldn't want a buyer to see? |
 | **A** | **Accounting for time** | Does this consume 30+ minutes per week? |
 | **R** | **Reusable** | Would more than one rep on my team benefit from this? |
+
+> **New to Claude? Score S and P like this:**
+> - **S**: Think about the task structure, not your Claude usage. A post-call CRM update always starts with call notes and ends with filled opportunity fields — same inputs, same outputs, every time. That's a 1. A one-off executive escalation email looks different every time — that's a 0.
+> - **P**: Think about how much explaining it would take for a smart new hire to do this task without any context. Cold email requires explaining your ICP, your tone, your banned phrases, your CTAs, your product positioning. All that background = Prompt-heavy = 1. "Schedule a meeting" needs almost no explanation = 0.
 
 ---
 
@@ -20,16 +24,23 @@ Use this to identify which of your weekly workflows should become a Claude Skill
 
 For each workflow you're considering, score each criterion: **0** (No) or **1** (Yes).
 
+**Calibration examples** (pre-scored — use these to anchor your own scoring before you start):
+
+| Workflow | S | P | E | A | R | Total | Build? |
+|----------|---|---|---|---|---|-------|--------|
+| *Post-call CRM update* | *1* | *1* | *1* | *1* | *1* | *5* | *Yes — every rep does this the same way, every call, and it needs company/product context to do well* |
+| *One-off exec escalation email* | *0* | *0* | *0* | *0* | *0* | *0* | *No — every situation is different; no repeatable structure to automate* |
+
+**Your workflows:**
+
 | Workflow | S | P | E | A | R | Total | Build? |
 |----------|---|---|---|---|---|-------|--------|
 | Pre-call research brief | | | | | | | |
-| Post-call CRM update | | | | | | | |
 | Follow-up email after demo | | | | | | | |
 | Pipeline review for manager | | | | | | | |
 | Cold outreach sequence | | | | | | | |
 | Proposal first draft | | | | | | | |
 | QBR narrative | | | | | | | |
-| [Your workflow] | | | | | | | |
 | [Your workflow] | | | | | | | |
 | [Your workflow] | | | | | | | |
 
