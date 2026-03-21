@@ -83,9 +83,22 @@ Output the following report and save it to `Pipeline/Weekly-Reviews/pipeline-rev
 
 ### Deal Tracker
 
-| Account | Stage | ARR | Close Date | Last Activity | Health |
-|---------|-------|-----|------------|--------------|--------|
-[List all deals]
+For each deal, compute a **MEDDIC-lite Health score** using the following signals from CRM data:
+
+| Signal | 🟢 Green | 🟡 Yellow | 🔴 Red |
+|--------|---------|---------|-------|
+| Economic Buyer | EB contact role identified in CRM | — | No EB contact on record |
+| Champion | Champion role identified | — | No champion identified |
+| Last Activity | < 14 days ago | 14–30 days ago | > 30 days ago |
+| Next Step | CRM NextStep field populated | — | NextStep field empty |
+| Close Date | > 14 days out | 1–14 days out | Past due |
+| Stage Momentum | < 21 days in current stage | 21–35 days | > 35 days in same stage |
+
+**Overall Health** = worst single signal across all six. Show count of 🔴 signals in the Health column (e.g., "🟡 2 gaps").
+
+| Account | Stage | ARR | Close Date | Last Activity | MEDDIC Health |
+|---------|-------|-----|------------|--------------|---------------|
+[List all deals — one row per deal. Health column format: 🟢 Strong / 🟡 [N] gaps / 🔴 Critical ([N] gaps)]
 
 ### At-Risk Deals (Flag These)
 
@@ -96,11 +109,21 @@ Flag any deal that meets at least one of:
 - Missing Economic Buyer
 - No confirmed next step
 
-For each at-risk deal, note WHY it's flagged and suggest a next action.
+For each at-risk deal, note WHY it's flagged, which MEDDIC dimensions are failing, and suggest a next action.
 
-| Account | Risk Signal | Recommended Action |
-|---------|------------|-------------------|
-| | | |
+| Account | Risk Signal | MEDDIC Gaps | Recommended Action |
+|---------|------------|------------|-------------------|
+| | | | |
+
+### Deal Intelligence Summary
+
+After the At-Risk table, add a prioritized intelligence summary covering ALL deals (not just at-risk ones), sorted by health (worst first):
+
+| Account | MEDDIC Health | Top Gap | Suggested Move |
+|---------|--------------|---------|---------------|
+[One row per deal — worst health at top]
+
+*For any 🔴 deal, run `/deal-health [Account]` for the full MEDDIC deep-dive and coaching plan.*
 
 ### Deals Closing This Period
 
@@ -147,7 +170,10 @@ Run /knowledge-health for the full dashboard.
 
 ### Step 5: Ask for Review
 
-"Here's your pipeline review. A few questions before your 1:1:
+"Here's your pipeline review with deal intelligence.
+
+A few questions before your 1:1:
 - Are there any deals I'm missing or that have changed status?
-- Are the risk flags accurate, or is there context I should know?
+- Are the risk flags or MEDDIC gaps accurate, or is there context I should know?
+- Which 🔴 deal should I run a full `/deal-health` deep-dive on first?
 - What do you want to highlight to your manager?"

@@ -301,7 +301,7 @@ When drafting outreach, follow the Cold Outreach Skill.
 When processing calls, follow the Post-Call Skill.
 ```
 
-### In-class exercise B: Pipeline review (10 min)
+### In-class exercise B: Pipeline review with deal intelligence (10 min)
 
 **If CRM is connected**:
 ```
@@ -314,9 +314,15 @@ When processing calls, follow the Post-Call Skill.
 ```
 When prompted for pipeline data, paste the table from `Course-Materials/sample-pipeline.md`.
 
-Look at the output: which deals trip the at-risk flags and why? What's the coverage ratio? Is there a Knowledge Health pulse at the bottom — any stale files?
+Look at the output — it now includes deal-level MEDDIC intelligence, not just at-risk flags:
 
-> **Calibration**: See `Course-Materials/sample-outputs/pipeline-review-example.md` for a full `/pipeline-review` output on the sample pipeline — coverage ratio, at-risk flags, recommended actions, and a knowledge health pulse.
+1. **Deal Tracker**: Does the MEDDIC Health column match your intuition? Any surprises?
+2. **At-Risk Deals**: Each flagged deal now shows which specific MEDDIC dimensions are failing — not just "at risk."
+3. **Deal Intelligence Summary**: This is your Monday action list. Which deal would you call first? Which needs a `/deal-health` deep-dive?
+
+The teaching point: this is the same analysis you just ran manually on one deal in Module 4 — now running across your entire pipeline in one command.
+
+> **Calibration**: See `Course-Materials/sample-outputs/pipeline-review-example.md` for a full `/pipeline-review` output showing the Deal Tracker with MEDDIC Health column, updated At-Risk table, and Deal Intelligence Summary.
 
 ### In-class exercise C: The Monday Morning Workflow (10 min)
 

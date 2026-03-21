@@ -33,31 +33,69 @@
 
 ---
 
-### At-Risk Flags
+### Deal Tracker
+
+| Account | Stage | ARR | Close Date | Last Activity | MEDDIC Health |
+|---------|-------|-----|------------|--------------|---------------|
+| Thornwood Capital | Negotiation | $95K | Feb 28 | 26 days ago | 🔴 Critical (4 gaps) |
+| Northgate Logistics | Proposal | $78K | Mar 10 | 16 days ago | 🔴 Critical (3 gaps) |
+| Clearpath Solutions | Discovery | $52K | May 30 | 8 days ago | 🟡 2 gaps |
+| Meridian Industrial | Technical Eval | $127K | Apr 30 | 3 days ago | 🟢 Strong |
+| Vantage Software | Proposal | $89K | Apr 15 | 5 days ago | 🟢 Strong |
+| Cascadia Health | Discovery | $95K | Jun 15 | 7 days ago | 🟡 1 gap |
+| Bluefield Analytics | Technical Eval | $64K | May 1 | 4 days ago | 🟢 Strong |
+| Ironclad Systems | Proposal | $71K | Apr 22 | 6 days ago | 🟢 Strong |
+
+---
+
+### At-Risk Deals
 
 #### 🔴 CRITICAL: Thornwood Capital — $95K | Negotiation | 35 days stuck | 26 days no contact
-**Risk**: Stuck in legal review with no EB engagement. Economic buyer (Diana Reyes) has not been activated. No ROI deck exists. Deal will die quietly.
-**Recommended action**: Re-engage Marcus Reid this week with a specific re-engagement prompt — not "checking in." Bring an ROI summary as the artifact that creates the reason to talk.
+
+**Risk**: Stuck in legal review with no EB engagement.
+**MEDDIC Gaps**: No EB access 🔴, No next step 🔴, Stage stuck 35d 🔴, Last activity 26d 🔴
+**Recommended action**: Re-engage Marcus Reid this week with a specific prompt — not "checking in." Bring an ROI summary as the artifact that creates the reason to talk. Then ask Marcus directly to arrange a 20-minute call with Diana Reyes (EB).
 
 #### 🔴 CRITICAL: Northgate Logistics — $78K | Proposal | Past due close date | 16 days no activity
-**Risk**: Close date passed without a decision. No record of what happened. This is a toss-up between "they decided not to buy" and "they got busy and nobody followed up." Find out which before writing it off.
+
+**Risk**: Close date passed without a decision. No record of what happened.
+**MEDDIC Gaps**: Close date past 🔴, No EB confirmed 🔴, No next step 🔴
 **Recommended action**: Direct call or email to the champion today. One sentence: *"The proposal close date passed — I wanted to check in directly rather than assume. Is this still moving forward, or has something changed on your side?"*
 
 #### 🟡 WATCH: Clearpath Solutions — $52K | Discovery | No next call scheduled
-**Risk**: Discovery call happened but no follow-up scheduled. Early-stage deal with no momentum is a deal that will age out. The longer there's no scheduled next step, the lower the probability.
+
+**Risk**: Discovery call happened but no follow-up scheduled.
+**MEDDIC Gaps**: No next step 🔴, Champion not yet confirmed 🟡
 **Recommended action**: Send a follow-up today with 3 specific dates/times for a next call. Don't ask "when works for you?" — give them options.
 
 ---
 
-### Deals on Track
+### Deal Intelligence Summary
 
-| Account | Amount | Stage | Signal |
-|---------|--------|-------|--------|
-| Meridian Industrial | $127K | Technical Evaluation | Active — Sarah Kowalski re-engaged last week. RFP response due April 21. |
-| Vantage Software | $89K | Proposal | POC proposal sent. Marcus Reid reviewing. Reconnect Tuesday per agreement. |
-| Cascadia Health | $95K | Discovery | Second discovery call scheduled March 20. Priya Nair is a strong champion. |
-| Bluefield Analytics | $64K | Technical Evaluation | Evaluation in progress. No blockers surfaced. Check in mid-week. |
-| Ironclad Systems | $71K | Proposal | Proposal submitted. Follow-up call March 22. |
+| Account | MEDDIC Health | Top Gap | Suggested Move |
+|---------|--------------|---------|---------------|
+| Thornwood Capital | 🔴 Critical (4/6) | No EB access + stuck 35 days | Request exec intro from Marcus Reid; run `/deal-health Thornwood Capital` |
+| Northgate Logistics | 🔴 Critical (3/6) | Close date past, no next step | Champion check-in call today — pulse check before writing off |
+| Clearpath Solutions | 🟡 At Risk (2/6) | No next step, champion unconfirmed | Schedule follow-up with 3 date options; test if Sarah is your champion |
+| Cascadia Health | 🟡 1 gap (5/6) | Decision criteria not documented | Add to next discovery call: "Walk me through how you'll evaluate options" |
+| Meridian Industrial | 🟢 Strong (6/6) | — | Maintain cadence; RFP response April 21 — start drafting now |
+| Vantage Software | 🟢 Strong (6/6) | — | Tuesday reconnect confirmed — prep POC scope and timeline |
+| Ironclad Systems | 🟢 Strong (6/6) | — | Follow-up call March 22 — confirm next step live |
+| Bluefield Analytics | 🟢 Strong (6/6) | — | Mid-week check-in; no blockers surfaced |
+
+*For 🔴 deals, run `/deal-health [Account]` for the full MEDDIC deep-dive and coaching plan.*
+
+---
+
+### Deals Closing This Period (Next 30 Days)
+
+| Account | ARR | Close Date | MEDDIC Health | Next Step |
+|---------|-----|------------|--------------|-----------|
+| Vantage Software | $89K | Apr 15 | 🟢 Strong | POC reconnect Tuesday Mar 19 |
+| Ironclad Systems | $71K | Apr 22 | 🟢 Strong | Follow-up call Mar 22 |
+| Bluefield Analytics | $64K | May 1 | 🟢 Strong | Mid-week check-in |
+| Thornwood Capital | $95K | *Past due* | 🔴 Critical | Re-engage today |
+| Northgate Logistics | $78K | *Past due* | 🔴 Critical | Champion call today |
 
 ---
 
@@ -65,11 +103,11 @@
 
 **This week's top 3 priorities:**
 
-1. **Re-engage Thornwood + Northgate** — These two deals ($173K combined) need direct outreach today, not Thursday. Both are stalled for reasons you can address with one intentional touchpoint.
+1. **Re-engage Thornwood + Northgate today** — These two deals ($173K combined) need direct outreach now. Both are 🔴 Critical. Run `/deal-health Thornwood Capital` before outreach — it will generate a tailored re-engagement plan.
 
-2. **Add pipeline to cover the gap** — At 2.4x coverage, you're under target. Identify 2 prospects in your territory for outreach this week. The email sequence you built in Module 3 for [Company] should go out Monday.
+2. **Add pipeline to close the coverage gap** — At 2.4x coverage you need ~$293K more. Identify 2–3 prospects for outreach this week; use `/email-drafter [Company]` for each.
 
-3. **Confirm Vantage reconnect for Tuesday** — This is a warm deal with real urgency (board review June 2026). Tuesday's call needs a specific agenda: POC scope, timeline, who else needs to be involved.
+3. **Confirm Vantage Tuesday + prep POC scope** — Warm deal with board review urgency (June 2026). Agenda: POC scope, timeline, stakeholder map.
 
 ---
 

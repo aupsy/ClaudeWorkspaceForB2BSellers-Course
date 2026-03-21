@@ -400,6 +400,8 @@ Tell me:
 
 The coaching framing: "This is not Claude telling you what to do. This is Claude forcing you to articulate what you know and what you don't — which is what a good manager would do in a deal review."
 
+> **Forward pointer:** "You just did this for one deal manually. In Module 5, you'll see how `/pipeline-review` runs this same MEDDIC analysis across your entire pipeline in one command — so every Monday starts with a ranked action list instead of a blank CRM."
+
 ### Module 4 Deliverable
 
 A completed 360° Call Debrief with self-score vs. Claude score, plus a post-call summary and follow-up email from a real recent call.
@@ -491,6 +493,40 @@ Deliver each as a separate file. Run steps in parallel where possible.
 ```
 
 Manual equivalent: 90–120 minutes. Cowork: 5–8 minutes while the rep prepares for their first call.
+
+### Always-On Deal Intelligence (10 min)
+
+**The concept — from "rep asks Claude" to "Claude tells rep":**
+
+In Module 4, you ran deal coaching by pasting one deal into chat and asking Claude to analyze it. That's valuable — but it requires you to remember to do it, to choose which deal to analyze, and to prompt it yourself.
+
+The evolved version: `/pipeline-review` now includes a Deal Intelligence Summary that automatically scores every open deal for MEDDIC health and surfaces the gaps — without being asked. Every Monday morning, one command gives you:
+
+- A MEDDIC health score for every deal (🟢/🟡/🔴)
+- The specific dimension failing for each at-risk deal (e.g., "No EB access, Stage stuck 35 days")
+- A ranked action list sorted by deal risk
+- A clear pointer to which deal needs the `/deal-health` deep-dive
+
+**The teaching moment:** Write on the board:
+
+> *"Your Monday ritual IS your always-on intelligence."*
+
+The difference isn't a cron job. It's the discipline of running `/pipeline-review` before you open your email. What used to require manually reviewing each deal, deciding which needed attention, and prompting Claude one deal at a time — now happens in a single command.
+
+**Live demo (5 min):** Run `/pipeline-review` using the sample pipeline data. Walk through the Deal Intelligence Summary section:
+
+1. Point to a 🔴 deal in the table — "This deal has 4 MEDDIC gaps. What are they?" (Have a student read them out.)
+2. Ask: "What would you do with this information if you saw it at 8am Monday?"
+3. Show: "Now I run `/deal-health Thornwood Capital` — that's the precision drill-down for this one deal."
+
+**The two-speed workflow:**
+
+| When | Command | What it does |
+|------|---------|--------------|
+| Every Monday | `/pipeline-review` | Triage: MEDDIC health across all deals, ranked |
+| When a deal is 🔴 | `/deal-health [Account]` | Deep dive: full MEDDIC + communication patterns + coaching plan |
+
+**Facilitation note:** If students ask "why not automate this with a scheduled job?" — acknowledge it's technically possible, but the ritual is the point. The rep who opens Claude before their CRM every Monday is developing a fundamentally different habit than the rep who waits for an alert. The discipline is the capability.
 
 ### The 30-Day Adoption Roadmap (10 min)
 
