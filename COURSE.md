@@ -4,7 +4,8 @@ This guide is your companion to the course. It maps each module to the pre-built
 
 **How this workspace fits the course:**
 - **Modules 1–3** (Chat + Projects): These exercises work directly in Claude chat — no workspace setup required. The workspace is running in the background.
-- **Modules 4–5** (Cowork): These exercises use the skills in this workspace. By now you've loaded your context; the workspace becomes your autonomous colleague.
+- **Module 4** (Mixed): Most exercises use Cowork Skills (`/post-call`, proposal task) and need the workspace open. The deal coaching exercise uses plain Claude chat by design — it's ad hoc reasoning, not a repeatable workflow.
+- **Module 5** (Cowork): All exercises use this workspace. Full configuration, pipeline review, and the Monday morning workflow all require Cowork.
 
 **Before Module 4**: Make sure you've completed `COURSE-SETUP.md` — it's the 15-minute workspace setup that makes the Module 4-5 exercises work.
 

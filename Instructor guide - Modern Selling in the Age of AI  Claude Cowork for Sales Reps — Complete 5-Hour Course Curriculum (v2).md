@@ -290,9 +290,11 @@ A 3-email sequence and LinkedIn message for a real prospect, plus a completed Pe
 
 ## Module 4: Pipeline Velocity — The Self-Coaching Loop
 
-**Duration:** 60 minutes  
-**Coaching Skill:** Structured self-coaching — closing the feedback gap  
+**Duration:** 60 minutes
+**Coaching Skill:** Structured self-coaching — closing the feedback gap
 **AI Skill:** Post-call workflow, proposals, and deal coaching
+
+> **Mode note for instructors:** Module 4 is intentionally mixed. Three exercises use Cowork Skills (360° debrief, post-call processing, proposals) — students need the workspace open. One exercise (deal coaching) uses plain Claude chat — this is by design, because deal coaching is ad hoc reasoning that doesn't fit a repeatable pattern. Use the distinction as a teaching moment: "Cowork is for workflows you run repeatedly with the same structure. Chat is for thinking through situations that are unique every time."
 
 ### Opening Coaching Truth (10 min)
 
@@ -311,25 +313,35 @@ Introduce the **Self-Coaching Scorecard** — a lightweight, consistent framewor
 This scorecard works whether or not they use Claude. Claude makes applying it effortless.
 
 ### The 360° Call Debrief Activity (15 min)
+*🔧 Mode: Cowork — students use `/post-call [Account Name] debrief`*
 
 This is the most powerful activity in the course. Take a real recent discovery call transcript (Gong, Chorus, Zoom, or rough notes) and run this process:
 
 1. **Rep self-scores first** (5 min) — using the scorecard above, before Claude sees the transcript
-2. **Run through Claude** (2 min):
-```
-Analyze this discovery call transcript against this scorecard:
-[paste scorecard]
-Score each item 1–5 with specific evidence from the transcript.
-Also calculate the talk-to-listen ratio.
-Identify: the 3 moments a question would have been stronger than a statement.
-Identify: whether the next step set was committed or vague.
-One coaching note: the single most important thing to improve in the next call.
-```
+2. **Run through Claude** (2 min) — students type in the Cowork chat panel:
+   ```
+   /post-call [Account Name] debrief
+   ```
+   Claude reads the transcript from the Accounts folder (or prompts for a paste if none exists) and returns: scorecard with evidence, talk-to-listen ratio, 3 moments a question would have been stronger, and a single coaching note.
+
+   > **Instructor note — the raw prompt below is for your explanation, not for students to run.** Show it on screen to illustrate what the Skill is doing internally — this builds trust and understanding. Students invoke the Skill; you explain the mechanism.
+   >
+   > *What the Skill runs under the hood:*
+   > ```
+   > Analyze this discovery call transcript against this scorecard: [scorecard]
+   > Score each item 1–5 with specific evidence from the transcript.
+   > Calculate the talk-to-listen ratio.
+   > Identify: 3 moments a question would have been stronger than a statement.
+   > Identify: whether the next step set was committed or vague.
+   > One coaching note: the single most important thing to improve next call.
+   > ```
+
 3. **Compare** (8 min) — where did Claude see something the rep missed? Where did rep instinct beat the AI? Which gaps surprised them?
 
 The debrief builds two things simultaneously: self-awareness (coaching skill) and calibrated trust in the tool (AI skill). Reps learn what Claude is good at and what still requires their judgment.
 
 ### Post-Call Processing Workflow (15 min)
+*🔧 Mode: Cowork — uses `/post-call [Account Name]`, saves files to `/Calls` folder*
 
 The post-call Skill converts a raw transcript or rough notes into four outputs automatically:
 
@@ -348,6 +360,7 @@ Format each as a separate file in the /Calls folder.
 **The time math:** This workflow takes 90 seconds to trigger and 5 minutes to deliver. The manual equivalent — update CRM, write follow-up email, organize notes — takes 60–90 minutes and is frequently skipped.[^16]
 
 ### Proposal Generation (10 min)
+*🔧 Mode: Cowork — paste task prompt in Cowork chat; output saved as a file in `/Proposals`*
 
 Feed an RFP or requirement document plus call notes into Cowork:
 
@@ -369,8 +382,9 @@ Save as Acme_Proposal_Draft_v1.docx in /Proposals
 Proposals are 30–50% faster with Claude. The coaching principle: a first draft that captures their language and priorities is more persuasive than a polished template that doesn't.[^4]
 
 ### Deal Coaching (10 min)
+*💬 Mode: Plain Claude chat — paste directly into Claude.ai or the Projects chat. No Cowork needed.*
 
-Claude can serve as an always-available deal coach — analyzing stalled deals and generating tactical recommendations:
+Claude can serve as an always-available deal coach — analyzing stalled deals and generating tactical recommendations. This exercise is intentionally in plain chat: deal coaching is ad hoc reasoning that changes with every situation, not a repeatable structured workflow — it's a SPEAR 0 on S and P. Point this out explicitly so reps understand why it doesn't become a Skill.
 
 ```
 I've been working on the [Company] deal for 8 weeks.
