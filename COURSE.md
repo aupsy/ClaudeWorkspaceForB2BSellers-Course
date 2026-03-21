@@ -8,6 +8,10 @@ This guide is your companion to the course. It maps each module to the pre-built
 
 **Before Module 4**: Make sure you've completed `COURSE-SETUP.md` — it's the 15-minute workspace setup that makes the Module 4-5 exercises work.
 
+**Bring to class:**
+- `Course-Materials/participant-workbook.md` — print or keep open alongside this guide; has fill-in exercises and reflection space for each module
+- `Course-Materials/quick-reference-card.md` — print and keep at your desk; CRISP framework, O→E→A, top 5 prompts, all skill invocations on one page
+
 ---
 
 ## Module 1: The AI Seller Shift (60 min)
@@ -74,6 +78,8 @@ Save the file. Run:
 /account-research [a second prospect from your pipeline]
 ```
 You should see your customizations reflected.
+
+> **Calibration**: Compare your output against `Course-Materials/sample-outputs/account-research-example.md`. Does your brief have specific named executives, a real trigger event, quantified pain, and an insight-led opener? If it's more generic, add more context to `CLAUDE.md` or `Knowledge/product/` and re-run.
 
 ### In-class exercise B: Discovery roleplay (10 min)
 
@@ -246,6 +252,8 @@ Tell me:
 
 *Option B — Sample stalled deal*: Open `Course-Materials/sample-deal-notes.md` (Thornwood Capital — 35 days stuck in Negotiation). Paste the notes with the same prompt above.
 
+> **Calibration**: See `Course-Materials/sample-outputs/deal-health-example.md` for a full `/deal-health` output on Thornwood — including MEDDIC scorecard, risk analysis, and recommended next actions. Compare the depth and specificity against your output.
+
 ### Module 4 deliverable
 - Completed 360° Call Debrief with self-score vs. Claude score comparison
 - Post-call summary + follow-up email from a real or sample transcript
@@ -304,6 +312,8 @@ When processing calls, follow the Post-Call Skill.
 When prompted for pipeline data, paste the table from `Course-Materials/sample-pipeline.md`.
 
 Look at the output: which deals trip the at-risk flags and why? What's the coverage ratio? Is there a Knowledge Health pulse at the bottom — any stale files?
+
+> **Calibration**: See `Course-Materials/sample-outputs/pipeline-review-example.md` for a full `/pipeline-review` output on the sample pipeline — coverage ratio, at-risk flags, recommended actions, and a knowledge health pulse.
 
 ### In-class exercise C: The Monday Morning Workflow (10 min)
 
