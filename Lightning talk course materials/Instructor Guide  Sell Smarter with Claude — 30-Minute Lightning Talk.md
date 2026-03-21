@@ -290,6 +290,12 @@ specific buyer cares about. Do not use generic check-in language.
 
 **Goal:** Make the ask feel like a natural next step, not a pitch. You're not enrolling them — you're inviting them.
 
+> **Instructor note — persona bridging:** The demos in this talk use NVIDIA selling to Fortune 500 automotive (Ford, Caterpillar, Siemens) — large enterprise, hardware, $14M+ deals. The full course uses a mid-market SaaS scenario (Catalyst Sales Intelligence, $50–150K deals). Audiences who connect today may wonder if the course is relevant to their world. Bridge it explicitly before the CTA:
+>
+> *"One thing worth saying: today's demos used big enterprise accounts to make the examples vivid. In the full course, we use a SaaS sales scenario that's much closer to what most of you are selling day-to-day — same skills, more familiar context."*
+>
+> Skip this if your audience IS enterprise sellers — the NVIDIA context will already resonate.
+
 **Talk track:**
 > "If today felt useful, the full course is five hours. We go deeper on every one of these lessons, you build out real Cowork projects for your actual accounts, and — this is the part that matters — you leave with a working automated workflow. Not just ideas."
 

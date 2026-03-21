@@ -31,6 +31,8 @@ recent news in the last 90 days, likely pain points, and a suggested insight-led
 talk track for a first call.
 ```
 
+> **If you're using the sample data**: Use **Vantage Software** (CRO: Marcus Reid) as your first account. His contact and company data are already in HubSpot, and there's a full discovery transcript in `Course-Materials/sample-transcripts/discovery-call-midmarket.md` — compare your brief's pain hypothesis against what Marcus actually said in the call. That comparison is the lesson.
+
 **What good output looks like**: A specific brief with named executives, a real trigger event (funding, leadership change, expansion, product launch), a pain hypothesis tied to your solution, and an opener you wouldn't have written without this research.
 
 **If it feels generic**: Your Project needs more context. Add your product one-pager and re-run.
@@ -90,6 +92,8 @@ This is private, non-judgmental practice. The coaching note it produces feeds in
 ### The SPEAR check (5 min)
 
 Before leaving Module 2, use `Course-Materials/spear-framework.md` to identify one more workflow in your week that should become a Skill. Any workflow scoring 3+ out of 5 is worth building.
+
+> **Note**: You're identifying candidates here, not building them yet. Write down your top 1–2 workflows on paper. In Module 5 you'll come back to this list and actually build the Skill — the SPEAR score tells you which one to prioritize first.
 
 ### Module 2 deliverable
 - Customized `account-research` SKILL.md (your preferred output format + O→E→A discovery questions)
@@ -339,6 +343,8 @@ Follow `SALESFORCE-SETUP.md` for Salesforce, HubSpot, or Dynamics 365.
 ## 30-Day Adoption Roadmap
 
 Take this home. One focus area per week.
+
+> **Sequencing note**: Weeks 1–2 use **Claude Projects** (set up in Module 1 — no workspace install needed). Week 3+ uses **Claude Cowork** (set up in Module 5). If you haven't completed Module 5 setup yet, start with Week 1 regardless.
 
 **Week 1 — Foundation**
 Run Claude account research before every call. Time yourself against your pre-course baseline.

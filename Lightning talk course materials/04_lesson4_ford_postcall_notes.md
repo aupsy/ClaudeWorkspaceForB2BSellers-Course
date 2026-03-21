@@ -1,5 +1,5 @@
 # Ford Motor Company — Post-Call Raw Notes (Voice-to-Text)
-*For use with Lesson 3 Demo: "From Raw Notes to CRM + Coaching in 60 Seconds"*
+*For use with Lesson 4 Demo: "From Raw Notes to CRM + Coaching in 60 Seconds"*
 
 ---
 
@@ -50,4 +50,4 @@ ended on a really good note. james said "i'm excited about where this is going" 
 - **C** Champion — Who will sell for you when you're not in the room?
 
 ---
-*Source file for NVIDIA Cowork Demo | Lesson 3: CRM + Coaching*
+*Source file for NVIDIA Cowork Demo | Lesson 4: CRM + Coaching*

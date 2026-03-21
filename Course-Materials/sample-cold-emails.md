@@ -208,3 +208,30 @@ Morgan
 ---
 
 *Fictional companies and names only. For course use.*
+
+---
+
+## Facilitator Answer Key
+
+*For debrief use only — do not share with participants before the exercise.*
+
+Scoring rubric recap: **Trigger** (1 = generic/no trigger, 5 = specific verifiable event), **Problem Hypothesis** (1 = feature push, 5 = genuine business insight), **CTA** (1 = vague "let me know", 5 = specific, low-friction ask)
+
+| Email | Trigger | Problem Hypothesis | CTA | Notes |
+|-------|---------|-------------------|-----|-------|
+| 1 — Jennifer Walsh / NovaClear | **5** | **5** | **5** | Gold standard. Specific Series B + TechCrunch quote. Pain is precise ($47M ramp math). CTA is 15 min, not a demo. |
+| 2 — Marcus Okafor / Vantage | **1** | **1** | **2** | "Came across your profile" + "growth trajectory" = no research. Problem is generic ("improve performance"). Weak CTA. Classic delete. |
+| 3 — David Chen / Meridian | **4** | **4** | **5** | Strong: specific hiring signal (6 AEs), real insight about how ramp losses are misattributed in CRM. Reference offer is excellent. Minor deduction: trigger is LinkedIn job listing, not a press announcement. |
+| 4 — Sarah Kowalski / Meridian | **1** | **1** | **2** | "Hope you're doing well" opener. No research. Pure feature push. 30-minute ask is too long for cold outreach. |
+| 5 — Priya Nair / Cascadia | **4** | **4** | **4** | Specific Oregon expansion trigger. Insight about clinical fluency ramp is sector-aware. CTA is a qualification question — smart. Slight deduction: trigger could be more cited (where did the announcement come from?). |
+| 6 — Rob Fletcher / Ironclad | **2** | **1** | **1** | "Open sales positions" is a weak trigger — visible to anyone. No real insight. 30-minute demo ask on the first email. |
+| 7 — Lisa Tran / Bluefield | **5** | **5** | **4** | Best problem hypothesis in the set — quotes her SXSW talk directly, connects to a real downstream effect (reps trained for IT being routed to data PMs). Ends with a genuine diagnostic question rather than a CTA — clever but slightly soft on the ask. |
+| 8 — James Whitmore / Keystone | **1** | **1** | **2** | "Cutting-edge AI technology," "leverage," "transform your sales organization" — every buzzword. No research. Calendar-invite ask is presumptuous. |
+| 9 — Rachel Obara / Summit | **3** | **4** | **5** | Seasonal urgency angle is smart and sector-specific. Concrete customer proof point (6 weeks vs. 14). P.S. routing question is a strong technique. Trigger deduction: "8 open positions" is moderately specific (job board data) but not a unique business event. |
+| 10 — Derek Huang / Harlow | **1** | **1** | **1** | "Synergize," "circle back," "explore how we can add value" — the banned phrase hall of fame. Zero research. Zero insight. |
+
+**Debrief patterns to call out:**
+1. **Trigger quality determines whether you get the read.** Emails 1, 3, 7 all use verifiable, specific triggers. The rest are either weak (job listings, "growth trajectory") or nonexistent.
+2. **The best emails reveal something the buyer didn't know about themselves.** Email 3 (ramp losses misattributed in CRM) and Email 7 (technical buyers + new persona problem) both reframe the buyer's own situation. That's insight personalization.
+3. **CTA length inversely correlates with conversion.** "15 minutes" beats "30-minute demo" every time in cold outreach.
+4. **Industry/role fluency is the shortcut.** Emails 5 (healthcare ramp) and 9 (retail seasonality) show domain knowledge without saying "I know your industry." They demonstrate it by describing a specific pain the buyer recognizes.
